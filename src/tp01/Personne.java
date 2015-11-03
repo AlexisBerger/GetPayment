@@ -1,6 +1,7 @@
 package tp01;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Personne {
 

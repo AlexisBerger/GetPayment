@@ -24,14 +24,12 @@ public class TestFilRouge {
 
 		switch (nb) {
 		case 1:
-			Iterator<CompteBancaire> listeCompte = p.getCompteBancaires().iterator();
-			while(listeCompte.hasNext()){
-				CompteBancaire cb = listeCompte.next();
-				System.out.println(cb);
-			}
+
 			break;
 		case 2:
-			
+			System.out.println("Veiller saisir le numero de compte a utilisé :");
+			sc.nextLine();
+
 			break;
 		case 3:
 
