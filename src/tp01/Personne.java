@@ -68,6 +68,14 @@ public class Personne {
 		addCompteBancaire(cb);
 	}
 	
+	public void visualiserCompte(){
+		Iterator<CompteBancaire> listeCompte = this.getCompteBancaires().iterator();
+		while(listeCompte.hasNext()){
+			CompteBancaire cb = listeCompte.next();
+			System.out.println(cb);
+		}
+	}
+	
 	
 
 }
