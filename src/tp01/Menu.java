@@ -8,8 +8,8 @@ public class Menu {
 		System.out.println("1. Voir le solde du compte");
 		System.out.println("2. Retirer un montant");
 		System.out.println("3. Faire un apport");
-		System.out.println("4. Ajouter un compte");
-		System.out.println("5. Quitter");
+		System.out.println("5. Ajouter un compte");
+		System.out.println("6. Quitter");
 		
 	}
 

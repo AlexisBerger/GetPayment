@@ -25,7 +25,7 @@ public class CompteBancaire {
 		if (montant > this.solde) {
 			System.err.println("Le montant à retirer est trop important, les fonds ne sont pas suffisant ! ");
 		} else {
-			if (montant > 0) {
+			if (montant > 0.0) {
 				this.solde -= montant;
 			}
 		}
