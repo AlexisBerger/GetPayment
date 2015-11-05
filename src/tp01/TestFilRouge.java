@@ -1,6 +1,5 @@
 package tp01;
 
-import java.util.DoubleSummaryStatistics;
 import java.util.Iterator;
 import java.util.Scanner;
 
