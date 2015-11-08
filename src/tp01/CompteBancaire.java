@@ -1,5 +1,7 @@
 package tp01;
 
+import Exception.SoldeNegatifException;
+
 public class CompteBancaire {
 
 	private final Double soldeDeBase = 100.00;
@@ -21,9 +23,9 @@ public class CompteBancaire {
 		}
 	}
 
-	public void RetirerMontant(Double montant) {
+	public void RetirerMontant(Double montant)throws SoldeNegatifException {
 		if (montant > this.solde) {
-			System.err.println("Le montant à retirer est trop important, les fonds ne sont pas suffisant ! ");
+			throw new SoldeNegatifException("Le montant à retirer est trop important, les fonds ne sont pas suffisant ! ");
 		} else {
 			if (montant > 0.0) {
 				this.solde -= montant;

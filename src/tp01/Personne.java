@@ -20,6 +20,7 @@ public class Personne {
 	
 	public void addCompteBancaire(CompteBancaire cb){
 		this.compteBancaires.add(cb);
+		this.nbCompte++;
 	}
 	
 	
@@ -70,6 +71,7 @@ public class Personne {
 	}
 	
 	public void visualiserCompte(){
+		System.out.println("\t Visualisation des comptes de "+this.prenom+" "+this.nom);
 		Iterator<CompteBancaire> listeCompte = this.getCompteBancaires().iterator();
 		while(listeCompte.hasNext()){
 			CompteBancaire cb = listeCompte.next();
