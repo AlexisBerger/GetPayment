@@ -30,7 +30,7 @@ public class TestFilRouge {
 				}
 			}
 
-			Personne p = new Personne(tab[1], tab[0], age);
+			Personne p = new Personne(1,tab[1], tab[0], age, "tot@mail.fr");
 			p.nouveauCompte(1000.00, "A");
 			p.nouveauCompte(100.0, "B");
 			p.nouveauCompte(10.0, "C");
@@ -40,7 +40,14 @@ public class TestFilRouge {
 			String num;
 			CompteBancaire compteSelect = null;
 			while (true) {
-				Menu m = new Menu();
+
+				System.out.println();
+				System.out.println("1. Voir le solde du compte");
+				System.out.println("2. Retirer un montant");
+				System.out.println("3. Faire un apport");
+				System.out.println("5. Ajouter un compte");
+				System.out.println("6. Quitter");
+				System.out.println();
 				sc = new Scanner(System.in);
 				int nb = 0;
 				if (sc.hasNextInt()) {

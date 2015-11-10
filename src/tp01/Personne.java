@@ -17,9 +17,9 @@ public class Personne {
 		
 	}
 	
-	public Personne(String nom, String prenom, int age, String mail) {
-		super();
+	public Personne(int num, String nom, String prenom, int age, String mail) {
 		this.nbCompte = 1;
+		this.numero = num;
 		this.nom = nom; 
 		this.prenom = prenom; 
 		this.age = age;
@@ -91,6 +91,12 @@ public class Personne {
 			CompteBancaire cb = listeCompte.next();
 			System.out.println(cb);
 		}
+	}
+	
+	@Override
+	public String toString(){
+		return this.nom;
+		
 	}
 	
 	
