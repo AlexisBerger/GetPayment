@@ -2,17 +2,17 @@ package modele;
 
 import Exception.SoldeNegatifException;
 
-public class CompteBancaire {
+public class Compte {
 
 	private final Double soldeDeBase = 100.00;
 	private String numeroDeCompte;
 	private Double solde;
 
-	public CompteBancaire(){
+	public Compte(){
 		
 	}
 	
-	public CompteBancaire(Double montantInit, String num) {
+	public Compte(Double montantInit, String num) {
 		if (montantInit < this.soldeDeBase) {
 			this.solde = this.soldeDeBase;
 		} else {

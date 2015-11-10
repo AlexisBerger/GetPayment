@@ -3,7 +3,7 @@ package modele;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Personne {
+public class Client {
 
 	private int nbCompte;
 	private int numero;
@@ -11,13 +11,13 @@ public class Personne {
 	private String prenom;
 	private int age;
 	private String email;
-	private ArrayList<CompteBancaire> compteBancaires = new ArrayList<CompteBancaire>();
+	private ArrayList<Compte> compteBancaires = new ArrayList<Compte>();
 
-	public Personne() {
+	public Client() {
 
 	}
 
-	public Personne(int num, String nom, String prenom, int age, String mail) {
+	public Client(int num, String nom, String prenom, int age, String mail) {
 		this.nbCompte = 1;
 		this.numero = num;
 		this.nom = nom;
@@ -26,7 +26,7 @@ public class Personne {
 		this.email = mail;
 	}
 
-	public void addCompteBancaire(CompteBancaire cb) {
+	public void addCompteBancaire(Compte cb) {
 		this.compteBancaires.add(cb);
 		this.nbCompte++;
 	}
@@ -63,11 +63,11 @@ public class Personne {
 		this.age = age;
 	}
 
-	public ArrayList<CompteBancaire> getCompteBancaires() {
+	public ArrayList<Compte> getCompteBancaires() {
 		return compteBancaires;
 	}
 
-	public void setCompteBancaires(ArrayList<CompteBancaire> compteBancaires) {
+	public void setCompteBancaires(ArrayList<Compte> compteBancaires) {
 		this.compteBancaires = compteBancaires;
 	}
 
@@ -88,22 +88,22 @@ public class Personne {
 	}
 
 	public void nouveauCompte(String n) {
-		CompteBancaire cb = new CompteBancaire(100.0, n);
+		Compte cb = new Compte(100.0, n);
 		addCompteBancaire(cb);
 	}
 
 	public void nouveauCompte(Double solde, String n) {
-		CompteBancaire cb = new CompteBancaire(solde, n);
+		Compte cb = new Compte(solde, n);
 		addCompteBancaire(cb);
 	}
 
 	public void visualiserCompte() {
 		System.out.println("\t Visualisation des comptes de " + this.prenom
 				+ " " + this.nom);
-		Iterator<CompteBancaire> listeCompte = this.getCompteBancaires()
+		Iterator<Compte> listeCompte = this.getCompteBancaires()
 				.iterator();
 		while (listeCompte.hasNext()) {
-			CompteBancaire cb = listeCompte.next();
+			Compte cb = listeCompte.next();
 			System.out.println(cb);
 		}
 	}
@@ -138,7 +138,7 @@ public class Personne {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Personne other = (Personne) obj;
+		Client other = (Client) obj;
 		if (age != other.age)
 			return false;
 		if (compteBancaires == null) {
