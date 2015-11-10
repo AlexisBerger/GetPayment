@@ -1,4 +1,4 @@
-package tp01;
+package application;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -6,6 +6,8 @@ import java.util.Scanner;
 
 import Exception.NombreDeCompteTropEleveException;
 import Exception.SoldeNegatifException;
+import modele.CompteBancaire;
+import modele.Personne;
 
 public class Application {
 
@@ -19,7 +21,7 @@ public class Application {
 		System.out
 				.println("\t \t Bienvenue dans la gestion de votre compte Bancaire");
 		System.out
-				.println("Aprennons d'abord a nous connaitre \nVous êtes (Nom + Prénom) ? ");
+				.println("Aprennons d'abord a nous connaitre \nVous Ãªtes (Nom + PrÃ©nom) ? ");
 		Scanner sc = new Scanner(System.in);
 		String pers = sc.nextLine();
 		String tab[] = pers.split("\\s");
@@ -27,7 +29,7 @@ public class Application {
 		try {
 
 			System.out.println("Bien " + tab[1] + " " + tab[0]
-					+ ", sans indiscrétion pourrais-je connaitre votre âge ? ");
+					+ ", sans indiscrÃ©tion pourrais-je connaitre votre Ã¢ge ? ");
 
 			int age = -1;
 			while (age < 0) {
@@ -99,7 +101,7 @@ public class Application {
 			}
 		} catch (IndexOutOfBoundsException e) {
 			System.out
-					.println("Il faut saisir le nom ET le prénom pour l'ouverture d'un compte bancaire. \nRechargez l'application");
+					.println("Il faut saisir le nom ET le prÃ©nom pour l'ouverture d'un compte bancaire. \nRechargez l'application");
 		}
 
 	}
@@ -107,7 +109,7 @@ public class Application {
 	public int menu() {
 		System.out.println("-->");
 		System.out.println("1. Afficher tous les clients et leurs comptes.");
-		System.out.println("2. Faire une opération sur le compte d’un client.");
+		System.out.println("2. Faire une opÃ©ration sur le compte dâ€™un client.");
 		System.out.println("3. Quitter.");
 		System.out.println("Saisir votre choix : ");
 		Scanner sc = new Scanner(System.in);
@@ -137,7 +139,7 @@ public class Application {
 		for (Personne p : this.tabClients) {
 			System.out.println(p);
 		}
-		System.out.println("Saisir le numéro du client :");
+		System.out.println("Saisir le numÃ©ro du client :");
 		Scanner sc = new Scanner(System.in);
 		if (sc.hasNextInt()) {
 			return sc.nextInt();
@@ -160,7 +162,7 @@ public class Application {
 			Scanner sc = new Scanner(System.in);
 			it = p.getCompteBancaires().iterator();
 			System.out
-					.println("Veillez saisir le numero de compte à utiliser :");
+					.println("Veillez saisir le numero de compte Ã  utiliser :");
 
 			num = sc.nextLine();
 			compteSelect = null;
@@ -226,14 +228,14 @@ public class Application {
 				if (sc.hasNextDouble()) {
 					Double solde = sc.nextDouble();
 					p.nouveauCompte(solde, numCompte);
-					System.out.println("Compte créé");
+					System.out.println("Compte crÃ©Ã©");
 				} else {
 					System.out.println("Veuillez saisir un nombre!!!!");
 				}
 			} else {
 				try {
 					throw new NombreDeCompteTropEleveException(
-							"Vous possédez déjà le nombre maximal de compte bancaire.");
+							"Vous possÃ©dez dÃ©jÃ  le nombre maximal de compte bancaire.");
 				} catch (NombreDeCompteTropEleveException e) {
 					e.printStackTrace();
 				}
