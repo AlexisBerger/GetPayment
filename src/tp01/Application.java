@@ -160,7 +160,7 @@ public class Application {
 			Scanner sc = new Scanner(System.in);
 			it = p.getCompteBancaires().iterator();
 			System.out
-					.println("Veillez saisir le numero de compte à utiliser :");
+					.println("Veuillez saisir le numero de compte à utiliser :");
 
 			num = sc.nextLine();
 			compteSelect = null;
@@ -173,7 +173,7 @@ public class Application {
 				}
 			}
 			if (compteSelect == null) {
-				System.out.println("veillez saisir un compte valide");
+				System.out.println("veuillez saisir un compte valide");
 			} else {
 				sc = new Scanner(System.in);
 				System.out.println("Combien voulez-vous retirer ?");
@@ -192,7 +192,7 @@ public class Application {
 			sc = new Scanner(System.in);
 			it = p.getCompteBancaires().iterator();
 			System.out
-					.println("Veillez saisir le numero de compte a utiliser :");
+					.println("Veuillez saisir le numero de compte a utiliser :");
 			num = sc.nextLine();
 			compteSelect = null;
 
