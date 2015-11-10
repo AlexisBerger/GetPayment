@@ -6,17 +6,26 @@ import java.util.Iterator;
 public class Personne {
 
 	private int nbCompte;
+	private int numero;
 	private String nom;
 	private String prenom;
 	private int age;
+	private String email; 
 	private ArrayList<CompteBancaire> compteBancaires = new ArrayList<CompteBancaire>(); 
 
-	public Personne(String nom, String prenom, int age) {
+	public Personne(){
+		
+	}
+	
+	public Personne(String nom, String prenom, int age, String mail) {
+		super();
 		this.nbCompte = 1;
 		this.nom = nom; 
 		this.prenom = prenom; 
 		this.age = age;
+		this.email = mail;
 	}
+	
 	
 	public void addCompteBancaire(CompteBancaire cb){
 		this.compteBancaires.add(cb);
@@ -63,6 +72,11 @@ public class Personne {
 
 	public void setCompteBancaires(ArrayList<CompteBancaire> compteBancaires) {
 		this.compteBancaires = compteBancaires;
+	}
+	
+	public void nouveauCompte(String n) {
+		CompteBancaire cb = new CompteBancaire(100.0, n);
+		addCompteBancaire(cb);
 	}
 
 	public void nouveauCompte(Double solde, String n) {

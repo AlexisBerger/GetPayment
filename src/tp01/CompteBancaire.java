@@ -8,6 +8,10 @@ public class CompteBancaire {
 	private String numeroDeCompte;
 	private Double solde;
 
+	public CompteBancaire(){
+		
+	}
+	
 	public CompteBancaire(Double montantInit, String num) {
 		if (montantInit < this.soldeDeBase) {
 			this.solde = this.soldeDeBase;
