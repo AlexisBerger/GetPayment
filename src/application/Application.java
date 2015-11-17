@@ -53,7 +53,7 @@ public class Application {
 				}
 			}
 
-			Client p = new Client("GP." + tab[0].charAt(0) + tab[1].charAt(1)
+			Client p = new Client("GP." + tab[0].toLowerCase().charAt(0) + tab[1].toLowerCase().charAt(0)
 					+ "12345", tab[0], tab[1], age, "tot@mail.fr");
 
 			p.nouveauCompte(1000.00, "A");

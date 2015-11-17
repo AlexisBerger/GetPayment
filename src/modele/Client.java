@@ -1,6 +1,10 @@
 package modele;
 
+import java.awt.SystemColor;
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 
 /**
@@ -19,6 +23,9 @@ public class Client {
 	private int age;
 	private String email;
 	private ArrayList<Compte> compteBancaires = new ArrayList<Compte>();
+
+	private DateFormat shortDateFormat = DateFormat.getDateTimeInstance(
+			DateFormat.SHORT, DateFormat.SHORT);
 
 	/**
 	 * Constructeur par défaut de la classe personne
@@ -42,16 +49,15 @@ public class Client {
 	 *            : mail de la personne
 	 */
 
-
 	public Client(String num, String nom, String prenom, int age, String mail) {
 
 		this.nbCompte = 1;
-		if(verifFormatNumeroDeCompte(num)){
-			this.numero = num;
-		}else{
-			System.err.println("Numéro de compte non valide ! \n Format : GP.xxNNNNN");
+		while (!verifFormatNumeroDeCompte(num)) {
+			System.out.println(num);
+			System.err
+					.println("Numéro de compte non valide ! \n Format : GP.xxNNNNN");
 		}
-		
+		this.numero = num;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.age = age;
@@ -60,7 +66,7 @@ public class Client {
 
 	public static boolean estMinusculeCaractere(char c) {
 		// Mettre les bonnes valeur ACSI
-		if (c < 25 && c > 42) {
+		if (c < 123 && c > 96) {
 			return true;
 		} else {
 			return false;
@@ -70,7 +76,7 @@ public class Client {
 
 	public static boolean estMinusculeChiffre(char c) {
 		// Mettre les bonnes valeur ACSI
-		if (c < 25 && c > 42) {
+		if (c < 58 && c > 47) {
 			return true;
 		} else {
 			return false;
@@ -211,8 +217,6 @@ public class Client {
 	 *            : liste des compte bancaire de la personne de la personne
 	 */
 
-
-
 	public void setCompteBancaires(ArrayList<Compte> compteBancaires) {
 
 		this.compteBancaires = compteBancaires;
@@ -264,7 +268,7 @@ public class Client {
 	 *            : numéro du compte bancaire à créer
 	 */
 	public void nouveauCompte(String n) {
-		Compte cb = new Compte(100.0, n);
+		Compte cb = new Compte(100.0, n, new Date());
 		addCompteBancaire(cb);
 	}
 
@@ -277,7 +281,7 @@ public class Client {
 	 *            : numéro du compte bancaire
 	 */
 	public void nouveauCompte(Double solde, String n) {
-		Compte cb = new Compte(solde, n);
+		Compte cb = new Compte(solde, n, new Date());
 		addCompteBancaire(cb);
 	}
 
@@ -289,8 +293,7 @@ public class Client {
 	public void visualiserCompte() {
 		System.out.println("\t Visualisation des comptes de " + this.prenom
 				+ " " + this.nom);
-		Iterator<Compte> listeCompte = this.getCompteBancaires()
-				.iterator();
+		Iterator<Compte> listeCompte = this.getCompteBancaires().iterator();
 		while (listeCompte.hasNext()) {
 			Compte cb = listeCompte.next();
 			System.out.println(cb);
