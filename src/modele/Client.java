@@ -9,7 +9,7 @@ import java.util.Iterator;
 import java.util.Scanner;
 
 /**
- * Classe permettant de créer une personne
+ * Classe permettant de crï¿½er une personne
  * 
  * @author Quentin
  * 
@@ -29,7 +29,7 @@ public class Client {
 			DateFormat.SHORT, DateFormat.SHORT);
 
 	/**
-	 * Constructeur par défaut de la classe personne
+	 * Constructeur par dï¿½faut de la classe personne
 	 */
 	public Client() {
 
@@ -39,13 +39,13 @@ public class Client {
 	 * Constructeur de la classe personne
 	 * 
 	 * @param num
-	 *            : numéro de la personne
+	 *            : numï¿½ro de la personne
 	 * @param nom
 	 *            : nom de la personne
 	 * @param prenom
-	 *            : prénom de la personne
+	 *            : prï¿½nom de la personne
 	 * @param age
-	 *            : âge de la personne
+	 *            : ï¿½ge de la personne
 	 * @param mail
 	 *            : mail de la personne
 	 */
@@ -55,8 +55,8 @@ public class Client {
 		this.nbCompte = 1;
 		while (!verifFormatNumeroDeCompte(num)) {
 			System.err
-					.println("Numéro de compte non valide pour "+nom +" "+prenom+" ! \n Format : GP.xxNNNNN");
-			System.out.println("Saisir un numéro de compte valide : ");
+					.println("NumÃ©ro de compte non valide pour "+nom +" "+prenom+" ! \n Format : GP.xxNNNNN");
+			System.out.println("Saisir un numero de compte valide : ");
 			Scanner sc = new Scanner(System.in);
 			num = sc.next();
 		}
@@ -66,7 +66,7 @@ public class Client {
 		this.age = age;
 		this.email = mail;
 		
-		System.out.println("Client "+nom +" "+prenom+" créé ! ");
+		System.out.println("Client "+nom +" "+prenom+" crÃ©Ã© ! ");
 	}
 
 	public static boolean estMinusculeCaractere(char c) {
@@ -118,11 +118,11 @@ public class Client {
 	}
 
 	/**
-	 * Procédure permettant d'ajouter un compte bancaire à la liste des compte
+	 * Procï¿½dure permettant d'ajouter un compte bancaire ï¿½ la liste des compte
 	 * de la personne
 	 * 
 	 * @param cb
-	 *            : le compte bancaire à ajouter
+	 *            : le compte bancaire ï¿½ ajouter
 	 */
 
 	public void addCompteBancaire(Compte cb) {
@@ -143,7 +143,7 @@ public class Client {
 	 * Setter du nombre de compte bancaire
 	 * 
 	 * @param nbCompte
-	 *            : le nombre de compte que possède la personne
+	 *            : le nombre de compte que possï¿½de la personne
 	 */
 	public void setNbCompte(int nbCompte) {
 		this.nbCompte = nbCompte;
@@ -159,7 +159,7 @@ public class Client {
 	}
 
 	/**
-	 * Setter perttant de définir le nom de la personne
+	 * Setter perttant de dï¿½finir le nom de la personne
 	 * 
 	 * @param nom
 	 *            : nom de la personne
@@ -169,38 +169,38 @@ public class Client {
 	}
 
 	/**
-	 * Getter permettant de connaitre le prénom de la personne
+	 * Getter permettant de connaitre le prï¿½nom de la personne
 	 * 
-	 * @return le prénom de la personne
+	 * @return le prï¿½nom de la personne
 	 */
 	public String getPrenom() {
 		return prenom;
 	}
 
 	/**
-	 * Setter permettant de définir le prénom de la personne
+	 * Setter permettant de dï¿½finir le prï¿½nom de la personne
 	 * 
 	 * @param prenom
-	 *            : prénom de la personne
+	 *            : prï¿½nom de la personne
 	 */
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
 
 	/**
-	 * Getter permettant de connaitre le l'âge de la personne
+	 * Getter permettant de connaitre le l'ï¿½ge de la personne
 	 * 
-	 * @return l'âge de la personne
+	 * @return l'ï¿½ge de la personne
 	 */
 	public int getAge() {
 		return age;
 	}
 
 	/**
-	 * Setter permettant de définir l'âge de la personne
+	 * Setter permettant de dï¿½finir l'ï¿½ge de la personne
 	 * 
 	 * @param age
-	 *            : âge de la personne
+	 *            : ï¿½ge de la personne
 	 */
 	public void setAge(int age) {
 		this.age = age;
@@ -216,7 +216,7 @@ public class Client {
 	}
 
 	/**
-	 * Setter permettant de définir la liste des comptes bancaire de la personne
+	 * Setter permettant de dï¿½finir la liste des comptes bancaire de la personne
 	 * 
 	 * @param compteBancaires
 	 *            : liste des compte bancaire de la personne de la personne
@@ -228,19 +228,19 @@ public class Client {
 	}
 
 	/**
-	 * Getter permettant de connaitre le numéro de la personne
+	 * Getter permettant de connaitre le numï¿½ro de la personne
 	 * 
-	 * @return le numéro de la personne
+	 * @return le numï¿½ro de la personne
 	 */
 	public String getNumero() {
 		return numero;
 	}
 
 	/**
-	 * Setter permettant de définir le numéro de la personne
+	 * Setter permettant de dï¿½finir le numï¿½ro de la personne
 	 * 
 	 * @param numero
-	 *            : numéro de la personne
+	 *            : numï¿½ro de la personne
 	 */
 	public void setNumero(String numero) {
 		this.numero = numero;
@@ -256,7 +256,7 @@ public class Client {
 	}
 
 	/**
-	 * Setter permettant de définir l'email de la personne
+	 * Setter permettant de dï¿½finir l'email de la personne
 	 * 
 	 * @param email
 	 *            : email de la personne
@@ -266,11 +266,11 @@ public class Client {
 	}
 
 	/**
-	 * Procédure permettant de créer un nouveau compte bancaire par défaut (avec
-	 * un montant = 100€)
+	 * Procï¿½dure permettant de crï¿½er un nouveau compte bancaire par dï¿½faut (avec
+	 * un montant = 100ï¿½)
 	 * 
 	 * @param n
-	 *            : numéro du compte bancaire à créer
+	 *            : numï¿½ro du compte bancaire ï¿½ crï¿½er
 	 */
 	public void nouveauCompte(String n) {
 		Compte cb = new Compte(100.0, n, new Date());
@@ -278,12 +278,12 @@ public class Client {
 	}
 
 	/**
-	 * Procédure permettant de créer un nouveau compte bancaire
+	 * Procï¿½dure permettant de crï¿½er un nouveau compte bancaire
 	 * 
 	 * @param solde
 	 *            : solde du compte bancaire
 	 * @param n
-	 *            : numéro du compte bancaire
+	 *            : numï¿½ro du compte bancaire
 	 */
 	public void nouveauCompte(Double solde, String n) {
 		Compte cb = new Compte(solde, n, new Date());
@@ -291,9 +291,9 @@ public class Client {
 	}
 
 	/**
-	 * Procédure permettant de visualiser l'ensembre des comptes bancaires de la
+	 * Procï¿½dure permettant de visualiser l'ensembre des comptes bancaires de la
 	 * personne Visualisation des comptes de Quentin Doucet Le compte A a 1000.0
-	 * € Le compte B a 100.0 € Le compte C a 100.0 €
+	 * ï¿½ Le compte B a 100.0 ï¿½ Le compte C a 100.0 ï¿½
 	 */
 	public void visualiserCompte() {
 		System.out.println("\t Visualisation des comptes de " + this.prenom
