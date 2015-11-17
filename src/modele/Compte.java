@@ -131,7 +131,11 @@ public class Compte {
 	 * 
 	 * @return the dateCrï¿½ation
 	 */
+<<<<<<< HEAD
+	public Date getDateCréation() {
+=======
 	public Date getDateCreation() {
+>>>>>>> origin/master
 		return dateCreation;
 	}
 
@@ -141,8 +145,13 @@ public class Compte {
 	 * @param dateCreation
 	 *            the dateCrï¿½ation to set
 	 */
+<<<<<<< HEAD
+	public void setDateCréation(Date dateCréation) {
+		this.dateCreation = dateCréation;
+=======
 	public void setDateCreation(Date dateCreation) {
 		this.dateCreation = dateCreation;
+>>>>>>> origin/master
 	}
 
 }

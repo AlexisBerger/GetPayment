@@ -60,7 +60,7 @@ public class Application {
 			p.nouveauCompte(100.0, "B");
 			p.nouveauCompte(10.0, "C");
 
-			Client p1 = new Client("GP.aj98765", "AiMARRE", "Jean", 12,
+			Client p1 = new Client("GP.a98765", "AiMARRE", "Jean", 12,
 
 			"AiMARRE@mail.fr");
 			p1.nouveauCompte(1000.00, "A");
@@ -164,8 +164,7 @@ public class Application {
 
 	public Client recupererClient(String num) {
 		for (Client p : tabClients) {
-
-			if (p.getNumero() == num) {
+			if (p.getNumero().equals(num)) {
 				return p;
 			}
 		}
