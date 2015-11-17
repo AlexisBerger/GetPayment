@@ -9,10 +9,10 @@ public class Compte {
 	private final Double soldeDeBase = 100.00;
 	private String numeroDeCompte;
 	private Double solde;
-	private Date dateCréation;
+	private Date dateCreation;
 
 	/**
-	 * Constructeur par défaut de la classe Compte
+	 * Constructeur par dï¿½faut de la classe Compte
 	 */
 	public Compte() {
 
@@ -24,7 +24,7 @@ public class Compte {
 	 * @param montantInit
 	 *            : montant initial du compte bancaire
 	 * @param num
-	 *            : numéro du compte bancaire
+	 *            : numï¿½ro du compte bancaire
 	 */
 
 	public Compte(Double montantInit, String num, Date d) {
@@ -34,14 +34,14 @@ public class Compte {
 			this.solde = montantInit;
 		}
 		this.setNumeroDeCompte(num);
-		this.setDateCréation(d);
+		this.setDateCreation(d);
 	}
 
 	/**
-	 * Procédure permettant d'ajouter un montant à un compte bancaire
+	 * Procï¿½dure permettant d'ajouter un montant ï¿½ un compte bancaire
 	 * 
 	 * @param montant
-	 *            : montant à ajouter (>=0)
+	 *            : montant ï¿½ ajouter (>=0)
 	 */
 	public void ajouterMontant(Double montant) {
 		if (montant > 0) {
@@ -50,12 +50,12 @@ public class Compte {
 	}
 
 	/**
-	 * Procédure permettant de retirer un montant à un compte bancaire
+	 * Procï¿½dure permettant de retirer un montant ï¿½ un compte bancaire
 	 * 
 	 * @param montant
-	 *            : montant à retirer (>=0)
+	 *            : montant ï¿½ retirer (>=0)
 	 * @throws SoldeNegatifException
-	 *             : exeception lancée si le solde à retirer est plus grand que
+	 *             : exeception lancï¿½e si le solde ï¿½ retirer est plus grand que
 	 *             les fonds du compte
 	 */
 	public void RetirerMontant(Double montant) throws SoldeNegatifException {
@@ -79,19 +79,19 @@ public class Compte {
 	}
 
 	/**
-	 * Getter permettant de connaitre le numéro du compte bancaire
+	 * Getter permettant de connaitre le numï¿½ro du compte bancaire
 	 * 
-	 * @return le numéro du compte bancaire
+	 * @return le numï¿½ro du compte bancaire
 	 */
 	public String getNumeroDeCompte() {
 		return numeroDeCompte;
 	}
 
 	/**
-	 * Setter permettant de définir le numéro du compte bancaire
+	 * Setter permettant de dï¿½finir le numï¿½ro du compte bancaire
 	 * 
 	 * @param numeroDeCompte
-	 *            : numéro du compte bancaire à définir
+	 *            : numï¿½ro du compte bancaire ï¿½ dï¿½finir
 	 */
 	public void setNumeroDeCompte(String numeroDeCompte) {
 		this.numeroDeCompte = numeroDeCompte;
@@ -105,22 +105,22 @@ public class Compte {
 	}
 
 	/**
-	 * Getter permettant de connaitre la date de création
+	 * Getter permettant de connaitre la date de crï¿½ation
 	 * 
-	 * @return the dateCréation
+	 * @return the dateCrï¿½ation
 	 */
-	public Date getDateCréation() {
-		return dateCréation;
+	public Date getDateCreation() {
+		return dateCreation;
 	}
 
 	/**
-	 * Setter permettant de définir la date de création
+	 * Setter permettant de dï¿½finir la date de crï¿½ation
 	 * 
-	 * @param dateCréation
-	 *            the dateCréation to set
+	 * @param dateCreation
+	 *            the dateCrï¿½ation to set
 	 */
-	public void setDateCréation(Date dateCréation) {
-		this.dateCréation = dateCréation;
+	public void setDateCreation(Date dateCreation) {
+		this.dateCreation = dateCreation;
 	}
 
 }
