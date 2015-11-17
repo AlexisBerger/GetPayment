@@ -60,7 +60,7 @@ public class Application {
 			p.nouveauCompte(100.0, "B");
 			p.nouveauCompte(10.0, "C");
 
-			Client p1 = new Client("GP.a98765", "AiMARRE", "Jean", 12,
+			Client p1 = new Client("GP.aj98765", "AiMARRE", "Jean", 12,
 
 			"AiMARRE@mail.fr");
 			p1.nouveauCompte(1000.00, "A");
@@ -77,9 +77,9 @@ public class Application {
 			this.aouterClient(p);
 			this.aouterClient(p1);
 			this.aouterClient(p2);
-
-			while (true) {
-				int res = menu();
+			int res = 0;
+			do{
+				res = menu();
 
 				switch (res) {
 				case 1:
@@ -114,7 +114,7 @@ public class Application {
 					break;
 				}
 
-			}
+			}while (res != 3);
 		} catch (IndexOutOfBoundsException e) {
 			System.out
 					.println("Il faut saisir le nom ET le prénom pour l'ouverture d'un compte bancaire. \nRechargez l'application");
