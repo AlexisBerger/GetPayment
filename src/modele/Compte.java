@@ -1,8 +1,11 @@
 package modele;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import Exception.SoldeNegatifException;
+import application.Operation;
+import application.TypeOperation;
 
 public class Compte {
 
@@ -10,7 +13,7 @@ public class Compte {
 	private String numeroDeCompte;
 	private Double solde;
 	private Date dateCreation;
-
+	private ArrayList<Operation> tabOperations;
 	/**
 	 * Constructeur par d�faut de la classe Compte
 	 */
@@ -35,6 +38,7 @@ public class Compte {
 		}
 		this.setNumeroDeCompte(num);
 		this.setDateCreation(d);
+		this.tabOperations = new ArrayList<Operation>();
 	}
 
 	/**
@@ -46,8 +50,17 @@ public class Compte {
 	public void ajouterMontant(Double montant) {
 		if (montant > 0) {
 			this.solde += montant;
+            ajouterOperation(new Operation(new Date(),montant, TypeOperation.CREDITE));
 		}
 	}
+
+    /**
+     * operation a jouter a l'historique
+     * @param operation a ajouter
+     */
+    public void ajouterOperation(Operation operation){
+        tabOperations.add(operation);
+    }
 
 	/**
 	 * Proc�dure permettant de retirer un montant � un compte bancaire
@@ -65,9 +78,18 @@ public class Compte {
 		} else {
 			if (montant > 0.0) {
 				this.solde -= montant;
-			}
+                ajouterOperation(new Operation(new Date(),montant, TypeOperation.DEBITE));
+
+            }
 		}
 	}
+
+    /**
+     * Permet d'afficher l'historique
+     */
+    public void visualiserHistorique(){
+        //TODO implementer
+    }
 
 	/**
 	 * Getter permettant de connaitre le solde du compte bancaire
