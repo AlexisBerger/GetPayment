@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.Scanner;
 
 /**
  * Classe permettant de créer une personne
@@ -53,15 +54,19 @@ public class Client {
 
 		this.nbCompte = 1;
 		while (!verifFormatNumeroDeCompte(num)) {
-			System.out.println(num);
 			System.err
-					.println("Numéro de compte non valide ! \n Format : GP.xxNNNNN");
+					.println("Numéro de compte non valide pour "+nom +" "+prenom+" ! \n Format : GP.xxNNNNN");
+			System.out.println("Saisir un numéro de compte valide : ");
+			Scanner sc = new Scanner(System.in);
+			num = sc.next();
 		}
 		this.numero = num;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.age = age;
 		this.email = mail;
+		
+		System.out.println("Client "+nom +" "+prenom+" créé ! ");
 	}
 
 	public static boolean estMinusculeCaractere(char c) {

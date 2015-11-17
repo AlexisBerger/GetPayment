@@ -9,7 +9,7 @@ public class Compte {
 	private final Double soldeDeBase = 100.00;
 	private String numeroDeCompte;
 	private Double solde;
-	private Date dateCréation;
+	private Date dateCreation;
 
 	/**
 	 * Constructeur par défaut de la classe Compte
@@ -110,7 +110,7 @@ public class Compte {
 	 * @return the dateCréation
 	 */
 	public Date getDateCréation() {
-		return dateCréation;
+		return dateCreation;
 	}
 
 	/**
@@ -120,7 +120,7 @@ public class Compte {
 	 *            the dateCréation to set
 	 */
 	public void setDateCréation(Date dateCréation) {
-		this.dateCréation = dateCréation;
+		this.dateCreation = dateCréation;
 	}
 
 }
