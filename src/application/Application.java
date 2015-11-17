@@ -9,14 +9,26 @@ import Exception.SoldeNegatifException;
 import modele.CompteBancaire;
 import modele.Personne;
 
+/**
+ * Classe permettant de gérer les méthodes de l'application
+ * 
+ * @author Quentin
+ * 
+ */
 public class Application {
 
 	private ArrayList<Personne> tabClients = new ArrayList<Personne>();
 
+	/**
+	 * Constructeur par défaut la classe Application
+	 */
 	public Application() {
 
 	}
 
+	/**
+	 * Procédure permettant de lancer/démarrer l'application
+	 */
 	public void demarrer() {
 		System.out
 				.println("\t \t Bienvenue dans la gestion de votre compte Bancaire");
@@ -41,23 +53,25 @@ public class Application {
 				}
 			}
 
-			Personne p = new Personne(1, tab[0], tab[1], age, "tot@mail.fr");
+			Personne p = new Personne("GP." + tab[0].charAt(0)
+					+ tab[1].charAt(1) + "12345", tab[0], tab[1], age,
+					"tot@mail.fr");
 			p.nouveauCompte(1000.00, "A");
 			p.nouveauCompte(100.0, "B");
 			p.nouveauCompte(10.0, "C");
 
-			Personne p1 = new Personne(2, "AiMARRE", "Jean", 12,
+			Personne p1 = new Personne("GP.aj43210", "AiMARRE", "Jean", 12,
 					"AiMARRE@mail.fr");
 			p1.nouveauCompte(1000.00, "A");
 			p1.nouveauCompte(100.0, "B");
 			p1.nouveauCompte(10.0, "C");
 
-			Personne p2 = new Personne(3, "COVERT", "Harry", 14,
+			Personne p2 = new Personne("GP.ch98765", "COVERT", "Harry", 14,
 					"COVERT@mail.fr");
 			p2.nouveauCompte(1000.00, "A");
 			p2.nouveauCompte(100.0, "B");
 			p2.nouveauCompte(10.0, "C");
-			
+
 			this.aouterClient(p);
 			this.aouterClient(p1);
 			this.aouterClient(p2);
@@ -72,7 +86,7 @@ public class Application {
 					}
 					break;
 				case 2:
-					int numeroClient = selectClient();
+					String numeroClient = selectClient();
 					int nb = 0;
 					do {
 						System.out.println();
@@ -106,6 +120,12 @@ public class Application {
 
 	}
 
+	/**
+	 * Fonction permettant d'afficher le menu principal et de faire saisir un
+	 * choix à l'utilisateur
+	 * 
+	 * @return le choix de l'utilisateur (entre 1 et 3)
+	 */
 	public int menu() {
 		System.out.println("-->");
 		System.out.println("1. Afficher tous les clients et leurs comptes.");
@@ -122,33 +142,57 @@ public class Application {
 
 	}
 
+	/**
+	 * Procédure permettant d'ajouter un nouveau client
+	 * 
+	 * @param p
+	 *            : personne à ajouter dans la liste des clients.
+	 */
 	public void aouterClient(Personne p) {
 		this.tabClients.add(p);
 	}
 
-	public Personne recupererClient(int num) {
+	/**
+	 * Fonction permettant de récupérer un client à partir de son numéro
+	 * 
+	 * @param num
+	 *            : numéro de la personne à rechercher
+	 * @return la personne si son numéro existe, null sinon.
+	 */
+	public Personne recupererClient(String num) {
 		for (Personne p : tabClients) {
 			if (p.getNumero() == num) {
 				return p;
-			} 
+			}
 		}
 		return null;
 	}
 
-	public int selectClient() {
+	/**
+	 * Fonction permettant de saisir un numéro de client à partir d'une liste
+	 * qui est affichée à l'utilisateur
+	 * 
+	 * @return le numéro saisir par l'utilisateur, -1
+	 */
+	public String selectClient() {
 		for (Personne p : this.tabClients) {
 			System.out.println(p);
 		}
 		System.out.println("Saisir le numéro du client :");
 		Scanner sc = new Scanner(System.in);
-		if (sc.hasNextInt()) {
-			return sc.nextInt();
-		} else {
-			return -1;
-		}
+		return sc.next();
 
 	}
 
+	/**
+	 * Procédure permettant de faire une opération en fonction d'un client et
+	 * d'un numéro correspondant à une action
+	 * 
+	 * @param p
+	 *            : personne dont on veut agir sur les comptes
+	 * @param nb
+	 *            : numéro de l'action
+	 */
 	public void faireOperation(Personne p, int nb) {
 		Iterator<CompteBancaire> it;
 		String num;
