@@ -1,9 +1,10 @@
 package application;
 
+import java.text.DateFormat;
 import java.util.Date;
 
 /**
- * Classe permettant de gérer les différentes opérations
+ * Classe permettant de gï¿½rer les diffï¿½rentes opï¿½rations
  * 
  * @author Quentin
  * 
@@ -13,9 +14,10 @@ public class Operation {
 	private Date dateOperation;
 	private double montant;
 	private TypeOperation type;
-
+	private DateFormat shortDateFormat = DateFormat.getDateTimeInstance(
+			DateFormat.SHORT, DateFormat.SHORT);
 	/**
-	 * Constructeur par défaut de la classe Operation
+	 * Constructeur par dï¿½faut de la classe Operation
 	 */
 	public Operation() {
 
@@ -25,11 +27,11 @@ public class Operation {
 	 * Constructeur de la classe Operation
 	 * 
 	 * @param dateOperation
-	 *            : date de l'opération
+	 *            : date de l'opï¿½ration
 	 * @param montant
-	 *            : montant de l'opéartion
+	 *            : montant de l'opï¿½artion
 	 * @param type
-	 *            : type de l'oprération
+	 *            : type de l'oprï¿½ration
 	 */
 	public Operation(Date dateOperation, double montant, TypeOperation type) {
 		this.dateOperation = dateOperation;
@@ -38,57 +40,57 @@ public class Operation {
 	}
 
 	/**
-	 * Getter permettant de connaitre la date de l'opération
+	 * Getter permettant de connaitre la date de l'opï¿½ration
 	 * 
-	 * @return la date de l'opération
+	 * @return la date de l'opï¿½ration
 	 */
 	public Date getDateOperation() {
 		return dateOperation;
 	}
 
 	/**
-	 * Setter permettant de définir la date de l'opération
+	 * Setter permettant de dï¿½finir la date de l'opï¿½ration
 	 * 
 	 * @param dateOperation
-	 *            : date à définir
+	 *            : date ï¿½ dï¿½finir
 	 */
 	public void setDateOperation(Date dateOperation) {
 		this.dateOperation = dateOperation;
 	}
 
 	/**
-	 * Getter permettant de connaitre le montant de l'opération
+	 * Getter permettant de connaitre le montant de l'opï¿½ration
 	 * 
-	 * @return montant de l'opération
+	 * @return montant de l'opï¿½ration
 	 */
 	public double getMontant() {
 		return montant;
 	}
 
 	/**
-	 * Setter permettant de définir le montant de l'opération
+	 * Setter permettant de dï¿½finir le montant de l'opï¿½ration
 	 * 
 	 * @param montant
-	 *            : montant à définir
+	 *            : montant ï¿½ dï¿½finir
 	 */
 	public void setMontant(double montant) {
 		this.montant = montant;
 	}
 
 	/**
-	 * Getter permettant de connaitre le type de l'opération
+	 * Getter permettant de connaitre le type de l'opï¿½ration
 	 * 
-	 * @return le type de l'opération
+	 * @return le type de l'opï¿½ration
 	 */
 	public TypeOperation getType() {
 		return type;
 	}
 
 	/**
-	 * Setter permettant de définir le type de l'opération
+	 * Setter permettant de dï¿½finir le type de l'opï¿½ration
 	 * 
 	 * @param type
-	 *            : type à définir
+	 *            : type ï¿½ dï¿½finir
 	 */
 	public void setType(TypeOperation type) {
 		this.type = type;
@@ -96,7 +98,7 @@ public class Operation {
 
 	@Override
 	public String toString() {
-		return this.dateOperation + " ; " + this.montant + " ; " + this.type;
+		return shortDateFormat.format(this.dateOperation) + " ; " + this.montant + " ; " + this.type;
 	}
 
 }

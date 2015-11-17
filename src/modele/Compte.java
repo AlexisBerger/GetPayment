@@ -2,6 +2,7 @@ package modele;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
 import Exception.SoldeNegatifException;
 import application.Operation;
@@ -88,7 +89,10 @@ public class Compte {
      * Permet d'afficher l'historique
      */
     public void visualiserHistorique(){
-        //TODO implementer
+        Iterator<Operation> it = tabOperations.iterator();
+        while (it.hasNext()){
+            System.out.println(it.next());
+        }
     }
 
 	/**

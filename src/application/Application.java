@@ -95,6 +95,7 @@ public class Application {
 						System.out.println("\t1. Voir le solde du compte");
 						System.out.println("\t2. Retirer un montant");
 						System.out.println("\t3. Faire un apport");
+						System.out.println("\t4. Afficher historique");
 						System.out.println("\t5. Ajouter un compte");
 						System.out.println("\t6. Quitter");
 						System.out.println();
@@ -265,7 +266,25 @@ public class Application {
 			}
 			break;
 		case 4:
+			sc = new Scanner(System.in);
+			it = p.getCompteBancaires().iterator();
+			System.out
+					.println("Veuillez saisir le numero de compte a utiliser :");
+			num = sc.nextLine();
+			compteSelect = null;
 
+			while (it.hasNext()) {
+				Compte compte = it.next();
+				if (compte.getNumeroDeCompte().equals(num)) {
+					compteSelect = compte;
+					break;
+				}
+			}
+			if (compteSelect == null) {
+				System.out.println("Veuillez saisir un compte valide");
+			} else {
+				compteSelect.visualiserHistorique();
+			}
 			break;
 		case 5:
 			if (p.getNbCompte() <= 10) {
