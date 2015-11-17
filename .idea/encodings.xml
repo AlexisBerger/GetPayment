@@ -2,8 +2,8 @@
 <project version="4">
   <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" defaultCharsetForPropertiesFiles="UTF-8">
     <file url="file://$PROJECT_DIR$/src/application/Application.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/modele/CompteBancaire.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/modele/Personne.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/modele/Client.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/modele/Compte.java" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

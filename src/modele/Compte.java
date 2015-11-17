@@ -4,23 +4,17 @@ import java.util.Date;
 
 import Exception.SoldeNegatifException;
 
-/**
- * Classe permettant de gérer un compte bancaire
- * 
- * @author Quentin
- * 
- */
-public class CompteBancaire {
+public class Compte {
 
 	private final Double soldeDeBase = 100.00;
 	private String numeroDeCompte;
 	private Double solde;
-	private Date dateCréation; 
+	private Date dateCréation;
 
 	/**
-	 * Constructeur par défaut de la classe CompteBancaire
+	 * Constructeur par défaut de la classe Compte
 	 */
-	public CompteBancaire() {
+	public Compte() {
 
 	}
 
@@ -32,7 +26,8 @@ public class CompteBancaire {
 	 * @param num
 	 *            : numéro du compte bancaire
 	 */
-	public CompteBancaire(Double montantInit, String num, Date d) {
+
+	public Compte(Double montantInit, String num, Date d) {
 		if (montantInit < this.soldeDeBase) {
 			this.solde = this.soldeDeBase;
 		} else {
@@ -110,7 +105,8 @@ public class CompteBancaire {
 	}
 
 	/**
-	 * Getter permettant de connaitre la date de création 
+	 * Getter permettant de connaitre la date de création
+	 * 
 	 * @return the dateCréation
 	 */
 	public Date getDateCréation() {
@@ -118,8 +114,10 @@ public class CompteBancaire {
 	}
 
 	/**
-	 * Setter permettant de définir la date de création 
-	 * @param dateCréation the dateCréation to set
+	 * Setter permettant de définir la date de création
+	 * 
+	 * @param dateCréation
+	 *            the dateCréation to set
 	 */
 	public void setDateCréation(Date dateCréation) {
 		this.dateCréation = dateCréation;

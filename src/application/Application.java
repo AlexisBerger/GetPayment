@@ -6,8 +6,8 @@ import java.util.Scanner;
 
 import Exception.NombreDeCompteTropEleveException;
 import Exception.SoldeNegatifException;
-import modele.CompteBancaire;
-import modele.Personne;
+import modele.Compte;
+import modele.Client;
 
 /**
  * Classe permettant de gérer les méthodes de l'application
@@ -17,7 +17,7 @@ import modele.Personne;
  */
 public class Application {
 
-	private ArrayList<Personne> tabClients = new ArrayList<Personne>();
+	private ArrayList<Client> tabClients = new ArrayList<Client>();
 
 	/**
 	 * Constructeur par défaut la classe Application
@@ -53,21 +53,23 @@ public class Application {
 				}
 			}
 
-			Personne p = new Personne("GP." + tab[0].charAt(0)
-					+ tab[1].charAt(1) + "12345", tab[0], tab[1], age,
-					"tot@mail.fr");
+			Client p = new Client("GP." + tab[0].charAt(0) + tab[1].charAt(1)
+					+ "12345", tab[0], tab[1], age, "tot@mail.fr");
+
 			p.nouveauCompte(1000.00, "A");
 			p.nouveauCompte(100.0, "B");
 			p.nouveauCompte(10.0, "C");
 
-			Personne p1 = new Personne("GP.aj43210", "AiMARRE", "Jean", 12,
-					"AiMARRE@mail.fr");
+			Client p1 = new Client("GP.aj98765", "AiMARRE", "Jean", 12,
+
+			"AiMARRE@mail.fr");
 			p1.nouveauCompte(1000.00, "A");
 			p1.nouveauCompte(100.0, "B");
 			p1.nouveauCompte(10.0, "C");
 
-			Personne p2 = new Personne("GP.ch98765", "COVERT", "Harry", 14,
-					"COVERT@mail.fr");
+			Client p2 = new Client("GP.ch98765", "COVERT", "Harry", 14,
+
+			"COVERT@mail.fr");
 			p2.nouveauCompte(1000.00, "A");
 			p2.nouveauCompte(100.0, "B");
 			p2.nouveauCompte(10.0, "C");
@@ -81,7 +83,7 @@ public class Application {
 
 				switch (res) {
 				case 1:
-					for (Personne tpers : this.tabClients) {
+					for (Client tpers : this.tabClients) {
 						tpers.visualiserCompte();
 					}
 					break;
@@ -148,7 +150,7 @@ public class Application {
 	 * @param p
 	 *            : personne à ajouter dans la liste des clients.
 	 */
-	public void aouterClient(Personne p) {
+	public void aouterClient(Client p) {
 		this.tabClients.add(p);
 	}
 
@@ -159,8 +161,10 @@ public class Application {
 	 *            : numéro de la personne à rechercher
 	 * @return la personne si son numéro existe, null sinon.
 	 */
-	public Personne recupererClient(String num) {
-		for (Personne p : tabClients) {
+
+	public Client recupererClient(String num) {
+		for (Client p : tabClients) {
+
 			if (p.getNumero() == num) {
 				return p;
 			}
@@ -175,7 +179,7 @@ public class Application {
 	 * @return le numéro saisir par l'utilisateur, -1
 	 */
 	public String selectClient() {
-		for (Personne p : this.tabClients) {
+		for (Client p : this.tabClients) {
 			System.out.println(p);
 		}
 		System.out.println("Saisir le numéro du client :");
@@ -193,10 +197,12 @@ public class Application {
 	 * @param nb
 	 *            : numéro de l'action
 	 */
-	public void faireOperation(Personne p, int nb) {
-		Iterator<CompteBancaire> it;
+
+	public void faireOperation(Client p, int nb) {
+		Iterator<Compte> it;
+
 		String num;
-		CompteBancaire compteSelect = null;
+		Compte compteSelect = null;
 
 		switch (nb) {
 		case 1:
@@ -212,7 +218,7 @@ public class Application {
 			compteSelect = null;
 
 			while (it.hasNext()) {
-				CompteBancaire compte = it.next();
+				Compte compte = it.next();
 				if (compte.getNumeroDeCompte().equals(num)) {
 					compteSelect = compte;
 					break;
@@ -243,7 +249,7 @@ public class Application {
 			compteSelect = null;
 
 			while (it.hasNext()) {
-				CompteBancaire compte = it.next();
+				Compte compte = it.next();
 				if (compte.getNumeroDeCompte().equals(num)) {
 					compteSelect = compte;
 					break;

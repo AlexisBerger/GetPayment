@@ -9,7 +9,8 @@ import java.util.Iterator;
  * @author Quentin
  * 
  */
-public class Personne {
+
+public class Client {
 
 	private int nbCompte;
 	private String numero;
@@ -17,12 +18,12 @@ public class Personne {
 	private String prenom;
 	private int age;
 	private String email;
-	private ArrayList<CompteBancaire> compteBancaires = new ArrayList<CompteBancaire>();
+	private ArrayList<Compte> compteBancaires = new ArrayList<Compte>();
 
 	/**
 	 * Constructeur par défaut de la classe personne
 	 */
-	public Personne() {
+	public Client() {
 
 	}
 
@@ -40,7 +41,10 @@ public class Personne {
 	 * @param mail
 	 *            : mail de la personne
 	 */
-	public Personne(String num, String nom, String prenom, int age, String mail) {
+
+
+	public Client(String num, String nom, String prenom, int age, String mail) {
+
 		this.nbCompte = 1;
 		if(verifFormatNumeroDeCompte(num)){
 			this.numero = num;
@@ -109,7 +113,8 @@ public class Personne {
 	 * @param cb
 	 *            : le compte bancaire à ajouter
 	 */
-	public void addCompteBancaire(CompteBancaire cb) {
+
+	public void addCompteBancaire(Compte cb) {
 		this.compteBancaires.add(cb);
 		this.nbCompte++;
 	}
@@ -195,7 +200,7 @@ public class Personne {
 	 * 
 	 * @return la liste des compte bancaire de la personne
 	 */
-	public ArrayList<CompteBancaire> getCompteBancaires() {
+	public ArrayList<Compte> getCompteBancaires() {
 		return compteBancaires;
 	}
 
@@ -205,7 +210,11 @@ public class Personne {
 	 * @param compteBancaires
 	 *            : liste des compte bancaire de la personne de la personne
 	 */
-	public void setCompteBancaires(ArrayList<CompteBancaire> compteBancaires) {
+
+
+
+	public void setCompteBancaires(ArrayList<Compte> compteBancaires) {
+
 		this.compteBancaires = compteBancaires;
 	}
 
@@ -255,7 +264,7 @@ public class Personne {
 	 *            : numéro du compte bancaire à créer
 	 */
 	public void nouveauCompte(String n) {
-		CompteBancaire cb = new CompteBancaire(100.0, n);
+		Compte cb = new Compte(100.0, n);
 		addCompteBancaire(cb);
 	}
 
@@ -268,7 +277,7 @@ public class Personne {
 	 *            : numéro du compte bancaire
 	 */
 	public void nouveauCompte(Double solde, String n) {
-		CompteBancaire cb = new CompteBancaire(solde, n);
+		Compte cb = new Compte(solde, n);
 		addCompteBancaire(cb);
 	}
 
@@ -280,10 +289,10 @@ public class Personne {
 	public void visualiserCompte() {
 		System.out.println("\t Visualisation des comptes de " + this.prenom
 				+ " " + this.nom);
-		Iterator<CompteBancaire> listeCompte = this.getCompteBancaires()
+		Iterator<Compte> listeCompte = this.getCompteBancaires()
 				.iterator();
 		while (listeCompte.hasNext()) {
-			CompteBancaire cb = listeCompte.next();
+			Compte cb = listeCompte.next();
 			System.out.println(cb);
 		}
 	}
@@ -303,7 +312,7 @@ public class Personne {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Personne other = (Personne) obj;
+		Client other = (Client) obj;
 		if (age != other.age)
 			return false;
 		if (compteBancaires == null) {
