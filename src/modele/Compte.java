@@ -122,7 +122,7 @@ public class Compte {
 	@Override
 	public String toString() {
 		return "Le compte " + this.getNumeroDeCompte() + " a "
-				+ this.getSolde() + " â‚¬";
+				+ this.getSolde() + " €";
 
 	}
 
