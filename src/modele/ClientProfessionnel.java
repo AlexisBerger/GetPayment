@@ -2,16 +2,43 @@ package modele;
 
 import java.util.Scanner;
 
+/**
+ * Class permettant de créer un client "Professionnel"
+ * 
+ * @author Quentin
+ * 
+ */
 public class ClientProfessionnel extends Client {
 
 	private final static double DECOUVERT_AUTORISE = 0.00;
 	private String societe;
 	private int siren;
 
+	/**
+	 * Constructeur par défaut de la class ClientProfessionnel
+	 */
 	public ClientProfessionnel() {
 		super();
 	}
 
+	/**
+	 * Constructeur de la class ClientProfessionnel
+	 * 
+	 * @param num
+	 *            : numéro du client
+	 * @param nom
+	 *            : nom du client
+	 * @param prenom
+	 *            : prénom du client
+	 * @param age
+	 *            : âge du client
+	 * @param mail
+	 *            : email du client
+	 * @param societe
+	 *            : société du client
+	 * @param siren
+	 *            : numéro siren de la société du client
+	 */
 	public ClientProfessionnel(String num, String nom, String prenom, int age,
 			String mail, String societe, int siren) {
 		super(num, nom, prenom, age, mail, DECOUVERT_AUTORISE);
@@ -28,6 +55,13 @@ public class ClientProfessionnel extends Client {
 		System.out.println("Client " + nom + " " + prenom + " créé ! ");
 	}
 
+	/**
+	 * Fonction permettant de savoir si le numéro de siren à le bon format
+	 * 
+	 * @param siren
+	 *            : numéro à vérifier
+	 * @return vrai si le numéro à le bon format, faux sinon
+	 */
 	public boolean verifSiren(int siren) {
 		int nb = Integer.toString(siren).length();
 		if (nb == 7) {
@@ -37,6 +71,12 @@ public class ClientProfessionnel extends Client {
 		}
 	}
 
+	/**
+	 * Fonction permettant de connaitre le coût des compte pour un client
+	 * Professionnel
+	 * 
+	 * @return le coût des compte à un moment T
+	 */
 	public double getMontantAbonnement() {
 		int nombreOperation = 0;
 		int nombreCompte = 0;

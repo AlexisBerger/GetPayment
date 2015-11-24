@@ -8,6 +8,12 @@ import Exception.SoldeNegatifException;
 import application.Operation;
 import application.TypeOperation;
 
+/**
+ * Class permettan de créer un compte bancaire
+ * 
+ * @author Quentin
+ * 
+ */
 public class Compte {
 
 	private final Double soldeDeBase = 100.00;
@@ -18,7 +24,7 @@ public class Compte {
 	private ArrayList<Operation> tabOperations;
 
 	/**
-	 * Constructeur par dï¿½faut de la classe Compte
+	 * Constructeur par défaut de la classe Compte
 	 */
 	public Compte() {
 
@@ -30,7 +36,7 @@ public class Compte {
 	 * @param montantInit
 	 *            : montant initial du compte bancaire
 	 * @param num
-	 *            : numï¿½ro du compte bancaire
+	 *            : numéro du compte bancaire
 	 */
 
 	public Compte(Double montantInit, String num, Date d) {
@@ -45,10 +51,10 @@ public class Compte {
 	}
 
 	/**
-	 * Procï¿½dure permettant d'ajouter un montant ï¿½ un compte bancaire
+	 * Procédure permettant d'ajouter un montant à un compte bancaire
 	 * 
 	 * @param montant
-	 *            : montant ï¿½ ajouter (>=0)
+	 *            : montant à ajouter (>=0)
 	 */
 	public void ajouterMontant(Double montant) {
 		if (montant > 0) {
@@ -59,7 +65,7 @@ public class Compte {
 	}
 
 	/**
-	 * operation a jouter a l'historique
+	 * operation a ajouter a l'historique
 	 * 
 	 * @param operation
 	 *            a ajouter
@@ -69,12 +75,12 @@ public class Compte {
 	}
 
 	/**
-	 * Procï¿½dure permettant de retirer un montant ï¿½ un compte bancaire
+	 * Procédure permettant de retirer un montant à un compte bancaire
 	 * 
 	 * @param montant
-	 *            : montant ï¿½ retirer (>=0)
+	 *            : montant à retirer (>=0)
 	 * @throws SoldeNegatifException
-	 *             : exeception lancï¿½e si le solde ï¿½ retirer est plus grand
+	 *             : exeception lancée si le solde à retirer est plus grand
 	 *             que les fonds du compte
 	 */
 	public void RetirerMontant(double montant, double decouvert_autorise)
@@ -89,17 +95,24 @@ public class Compte {
 				ajouterOperation(new Operation(new Date(), montant,
 						TypeOperation.DEBITE));
 
-			}else{
+			} else {
 				if (montant > 0.0) {
 					this.solde -= montant;
-	                ajouterOperation(new Operation(new Date(),montant, TypeOperation.DEBITE));
+					ajouterOperation(new Operation(new Date(), montant,
+							TypeOperation.DEBITE));
 				}
 			}
 
 		}
 	}
-	
-	public int getNbOperation(){
+
+	/**
+	 * Fonction permettant de connaitre le nombre d'opération effectuées sur un
+	 * compte
+	 * 
+	 * @return le nombre d'opération sur un compte
+	 */
+	public int getNbOperation() {
 		return this.tabOperations.size();
 	}
 
@@ -125,7 +138,7 @@ public class Compte {
 	/**
 	 * Getter permettant de connaitre le numï¿½ro du compte bancaire
 	 * 
-	 * @return le numï¿½ro du compte bancaire
+	 * @return le numéro du compte bancaire
 	 */
 	public String getNumeroDeCompte() {
 		return numeroDeCompte;
@@ -135,7 +148,7 @@ public class Compte {
 	 * Setter permettant de dï¿½finir le numï¿½ro du compte bancaire
 	 * 
 	 * @param numeroDeCompte
-	 *            : numï¿½ro du compte bancaire ï¿½ dï¿½finir
+	 *            : numéro du compte bancaire à définir
 	 */
 	public void setNumeroDeCompte(String numeroDeCompte) {
 		this.numeroDeCompte = numeroDeCompte;
@@ -149,9 +162,9 @@ public class Compte {
 	}
 
 	/**
-	 * Getter permettant de connaitre la date de crï¿½ation
+	 * Getter permettant de connaitre la date de création
 	 * 
-	 * @return the dateCrï¿½ation
+	 * @return the dateCreation
 	 */
 
 	public Date getDateCreation() {
@@ -160,10 +173,10 @@ public class Compte {
 	}
 
 	/**
-	 * Setter permettant de dï¿½finir la date de crï¿½ation
+	 * Setter permettant de définir la date de création
 	 * 
 	 * @param dateCreation
-	 *            the dateCrï¿½ation to set
+	 *            the dateCreation to set
 	 */
 
 	public void setDateCreation(Date dateCreation) {
