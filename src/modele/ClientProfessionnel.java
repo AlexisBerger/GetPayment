@@ -50,9 +50,7 @@ public class ClientProfessionnel extends Client {
 
 	@Override
 	public String toString() {
-		return super.getNumero() + " - " + super.getNom() + " "
-				+ super.getPrenom() + " - " + super.getAge() + " ans - "
-				+ super.getEmail() + " - " + this.societe + " - " + this.siren
+		return super.toString() + " - " + this.societe + " - " + this.siren
 				+ " - " + getMontantAbonnement();
 	}
 

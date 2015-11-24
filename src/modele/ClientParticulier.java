@@ -38,8 +38,6 @@ public class ClientParticulier extends Client {
 	
 	@Override
 	public String toString() {
-		return super.getNumero() + " - " + super.getNom() + " "
-				+ super.getPrenom() + " - " + super.getAge() + " ans - "
-				+ super.getEmail() + " - " + getMontantAbonnement();
+		return super.toString() + " - " + getMontantAbonnement();
 	}
 }
