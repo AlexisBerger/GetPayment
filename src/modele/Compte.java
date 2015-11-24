@@ -89,9 +89,18 @@ public class Compte {
 				ajouterOperation(new Operation(new Date(), montant,
 						TypeOperation.DEBITE));
 
+			}else{
+				if (montant > 0.0) {
+					this.solde -= montant;
+	                ajouterOperation(new Operation(new Date(),montant, TypeOperation.DEBITE));
+				}
 			}
 
 		}
+	}
+	
+	public int getNbOperation(){
+		return this.tabOperations.size();
 	}
 
 	/**
