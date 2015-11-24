@@ -64,7 +64,7 @@ public class ClientProfessionnel extends Client {
 	 */
 	public boolean verifSiren(int siren) {
 		int nb = Integer.toString(siren).length();
-		if (nb == 7) {
+		if (nb == 9) {
 			return true;
 		} else {
 			return false;

@@ -55,23 +55,23 @@ public class Application {
 				}
 			}
 
-			Client p = new ClientProfessionnel("GP." + tab[0].toLowerCase().charAt(0) + tab[1].toLowerCase().charAt(0)
-					+ "12345", tab[0], tab[1], age, "tot@mail.fr", "Orange", 123467);
+			Client p = new ClientProfessionnel("GP."
+					+ tab[0].toLowerCase().charAt(0)
+					+ tab[1].toLowerCase().charAt(0) + "12345", tab[0], tab[1],
+					age, "tot@mail.fr", "Orange", 123467);
 
 			p.nouveauCompte(1000.00, "A");
 			p.nouveauCompte(100.0, "B");
 			p.nouveauCompte(10.0, "C");
 
-			Client p1 = new ClientParticulier("GP.aj98765", "AiMARRE", "Jean", 12,
-
-			"AiMARRE@mail.fr");
+			Client p1 = new ClientParticulier("GP.aj98765", "AiMARRE", "Jean",
+					12, "AiMARRE@mail.fr");
 			p1.nouveauCompte(1000.00, "A");
 			p1.nouveauCompte(100.0, "B");
 			p1.nouveauCompte(10.0, "C");
 
-			Client p2 = new ClientParticulier("GP.ch98765", "COVERT", "Harry", 14,
-
-			"COVERT@mail.fr");
+			Client p2 = new ClientParticulier("GP.ch98765", "COVERT", "Harry",
+					14, "COVERT@mail.fr");
 			p2.nouveauCompte(1000.00, "A");
 			p2.nouveauCompte(100.0, "B");
 			p2.nouveauCompte(10.0, "C");
@@ -80,7 +80,7 @@ public class Application {
 			this.aouterClient(p1);
 			this.aouterClient(p2);
 			int res = 0;
-			do{
+			do {
 				res = menu();
 
 				switch (res) {
@@ -117,7 +117,7 @@ public class Application {
 					break;
 				}
 
-			}while (res != 3);
+			} while (res != 3);
 		} catch (IndexOutOfBoundsException e) {
 			System.out
 					.println("Il faut saisir le nom ET le prénom pour l'ouverture d'un compte bancaire. \nRechargez l'application");
@@ -234,7 +234,8 @@ public class Application {
 				if (sc.hasNextDouble()) {
 
 					try {
-						compteSelect.RetirerMontant(sc.nextDouble(),p.getDECOUVERT_AUTORISE());
+						compteSelect.RetirerMontant(sc.nextDouble(),
+								p.getDECOUVERT_AUTORISE());
 					} catch (SoldeNegatifException e) {
 						e.printStackTrace();
 					}

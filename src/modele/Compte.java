@@ -92,6 +92,7 @@ public class Compte {
 			if (montant > this.solde) {
 				this.decouvert = montant - this.solde;
 				this.solde = 0.0;
+				System.err.println("Attention vous avez un découvert");
 				ajouterOperation(new Operation(new Date(), montant,
 						TypeOperation.DEBITE));
 

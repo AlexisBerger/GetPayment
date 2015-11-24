@@ -69,6 +69,6 @@ public class ClientParticulier extends Client {
 
 	@Override
 	public String toString() {
-		return super.toString() + " - " + getMontantAbonnement();
+		return super.toString() + " - " + getMontantAbonnement()+ "€ de frais de compte";
 	}
 }
