@@ -15,6 +15,7 @@ import java.util.Scanner;
 
 public class Client {
 
+	private final double DECOUVERT_AUTORISE;
 	private int nbCompte;
 	private String numero;
 	private String nom;
@@ -23,6 +24,7 @@ public class Client {
 	private String email;
 	private ArrayList<Compte> compteBancaires = new ArrayList<Compte>();
 
+	@SuppressWarnings("unused")
 	private DateFormat shortDateFormat = DateFormat.getDateTimeInstance(
 			DateFormat.SHORT, DateFormat.SHORT);
 
@@ -30,7 +32,7 @@ public class Client {
 	 * Constructeur par défaut de la classe personne
 	 */
 	public Client() {
-
+		this.DECOUVERT_AUTORISE = 0.0;
 	}
 
 	/**
@@ -47,13 +49,15 @@ public class Client {
 	 * @param mail
 	 *            : mail de la personne
 	 */
+	@SuppressWarnings("resource")
+	public Client(String num, String nom, String prenom, int age, String mail,
+			double decouv) {
 
-	public Client(String num, String nom, String prenom, int age, String mail) {
-
+		this.DECOUVERT_AUTORISE = decouv;
 		this.nbCompte = 1;
 		while (!verifFormatNumeroDeCompte(num)) {
-			System.err
-					.println("Numéro de compte non valide pour "+nom +" "+prenom+" ! \n Format : GP.xxNNNNN");
+			System.err.println("Numéro de compte non valide pour " + nom + " "
+					+ prenom + " ! \n Format : GP.xxNNNNN");
 			System.out.println("Saisir un numero de compte valide : ");
 			Scanner sc = new Scanner(System.in);
 			num = sc.next();
@@ -63,10 +67,16 @@ public class Client {
 		this.prenom = prenom;
 		this.age = age;
 		this.email = mail;
-		
-		System.out.println("Client "+nom +" "+prenom+" créé ! ");
 	}
 
+	/**
+	 * Fonction permettant de savoir si un caractère est en minuscule en se
+	 * basant sur les caractères acsii
+	 * 
+	 * @param c
+	 *            : le caractère à vérifier
+	 * @return Vrai si c'est une minuscule, et faux sinon
+	 */
 	public static boolean estMinusculeCaractere(char c) {
 		if (c < 123 && c > 96) {
 			return true;
@@ -76,6 +86,13 @@ public class Client {
 
 	}
 
+	/**
+	 * Fonction permettant de savoir si un caractère est un chiffre
+	 * 
+	 * @param c
+	 *            : le caractère à vérifier
+	 * @return Vrai si c'est un chiffre, faux sinon
+	 */
 	public static boolean estMinusculeChiffre(char c) {
 		if (c < 58 && c > 47) {
 			return true;
@@ -85,6 +102,13 @@ public class Client {
 
 	}
 
+	/**
+	 * Fonction permettant de vérifier le format d'un numéro de compte.
+	 * 
+	 * @param num
+	 *            : le numéro de compte a vérifier
+	 * @return Vrai si le numéro à le bon format (GP.fd12345), faux sinon
+	 */
 	public static boolean verifFormatNumeroDeCompte(String num) {
 		if (num.length() == 10) {
 			if (num.charAt(0) == 'G' && num.charAt(1) == 'P'
@@ -120,10 +144,48 @@ public class Client {
 	 * @param cb
 	 *            : le compte bancaire à ajouter
 	 */
-
 	public void addCompteBancaire(Compte cb) {
 		this.compteBancaires.add(cb);
 		this.nbCompte++;
+	}
+
+	/**
+	 * Procédure permettant de créer un nouveau compte bancaire par défaut (avec
+	 * un montant = 100€)
+	 * 
+	 * @param n
+	 *            : numéro du compte bancaire à créer
+	 */
+	public void nouveauCompte(String n) {
+		Compte cb = new Compte(100.0, n, new Date());
+		addCompteBancaire(cb);
+	}
+
+	/**
+	 * Procédure permettant de créer un nouveau compte bancaire
+	 * 
+	 * @param solde
+	 *            : solde du compte bancaire
+	 * @param n
+	 *            : numéro du compte bancaire
+	 */
+	public void nouveauCompte(Double solde, String n) {
+		Compte cb = new Compte(solde, n, new Date());
+		addCompteBancaire(cb);
+	}
+
+	/**
+	 * Procédure permettant de visualiser l'ensembre des comptes bancaires de la
+	 * personne
+	 */
+	public void visualiserCompte() {
+		System.out.println("\t Visualisation des comptes de " + this.prenom
+				+ " " + this.nom);
+		Iterator<Compte> listeCompte = this.getCompteBancaires().iterator();
+		while (listeCompte.hasNext()) {
+			Compte cb = listeCompte.next();
+			System.out.println(cb);
+		}
 	}
 
 	/**
@@ -261,45 +323,6 @@ public class Client {
 		this.email = email;
 	}
 
-	/**
-	 * Procédure permettant de créer un nouveau compte bancaire par défaut (avec
-	 * un montant = 100€)
-	 * 
-	 * @param n
-	 *            : numéro du compte bancaire à créer
-	 */
-	public void nouveauCompte(String n) {
-		Compte cb = new Compte(100.0, n, new Date());
-		addCompteBancaire(cb);
-	}
-
-	/**
-	 * Procï¿½dure permettant de créer un nouveau compte bancaire
-	 * 
-	 * @param solde
-	 *            : solde du compte bancaire
-	 * @param n
-	 *            : numéro du compte bancaire
-	 */
-	public void nouveauCompte(Double solde, String n) {
-		Compte cb = new Compte(solde, n, new Date());
-		addCompteBancaire(cb);
-	}
-
-	/**
-	 * Procédure permettant de visualiser l'ensembre des comptes bancaires de la
-	 * personne 
-	 */
-	public void visualiserCompte() {
-		System.out.println("\t Visualisation des comptes de " + this.prenom
-				+ " " + this.nom);
-		Iterator<Compte> listeCompte = this.getCompteBancaires().iterator();
-		while (listeCompte.hasNext()) {
-			Compte cb = listeCompte.next();
-			System.out.println(cb);
-		}
-	}
-
 	@Override
 	public String toString() {
 		return this.numero + " - " + this.nom + " " + this.prenom + " - "
@@ -343,6 +366,13 @@ public class Client {
 		} else if (!prenom.equals(other.prenom))
 			return false;
 		return true;
+	}
+
+	/**
+	 * @return the dECOUVERT_AUTORISE
+	 */
+	public double getDECOUVERT_AUTORISE() {
+		return DECOUVERT_AUTORISE;
 	}
 
 }

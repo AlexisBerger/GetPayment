@@ -6,6 +6,8 @@ import java.util.Scanner;
 
 import Exception.NombreDeCompteTropEleveException;
 import Exception.SoldeNegatifException;
+import modele.ClientParticulier;
+import modele.ClientProfessionnel;
 import modele.Compte;
 import modele.Client;
 
@@ -53,21 +55,21 @@ public class Application {
 				}
 			}
 
-			Client p = new Client("GP." + tab[0].toLowerCase().charAt(0) + tab[1].toLowerCase().charAt(0)
-					+ "12345", tab[0], tab[1], age, "tot@mail.fr");
+			Client p = new ClientProfessionnel("GP." + tab[0].toLowerCase().charAt(0) + tab[1].toLowerCase().charAt(0)
+					+ "12345", tab[0], tab[1], age, "tot@mail.fr", "Orange", 123467);
 
 			p.nouveauCompte(1000.00, "A");
 			p.nouveauCompte(100.0, "B");
 			p.nouveauCompte(10.0, "C");
 
-			Client p1 = new Client("GP.aj98765", "AiMARRE", "Jean", 12,
+			Client p1 = new ClientParticulier("GP.aj98765", "AiMARRE", "Jean", 12,
 
 			"AiMARRE@mail.fr");
 			p1.nouveauCompte(1000.00, "A");
 			p1.nouveauCompte(100.0, "B");
 			p1.nouveauCompte(10.0, "C");
 
-			Client p2 = new Client("GP.ch98765", "COVERT", "Harry", 14,
+			Client p2 = new ClientParticulier("GP.ch98765", "COVERT", "Harry", 14,
 
 			"COVERT@mail.fr");
 			p2.nouveauCompte(1000.00, "A");
@@ -232,7 +234,7 @@ public class Application {
 				if (sc.hasNextDouble()) {
 
 					try {
-						compteSelect.RetirerMontant(sc.nextDouble());
+						compteSelect.RetirerMontant(sc.nextDouble(),p.getDECOUVERT_AUTORISE());
 					} catch (SoldeNegatifException e) {
 						e.printStackTrace();
 					}

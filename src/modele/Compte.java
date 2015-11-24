@@ -14,7 +14,9 @@ public class Compte {
 	private String numeroDeCompte;
 	private Double solde;
 	private Date dateCreation;
+	private Double decouvert = 0.0;
 	private ArrayList<Operation> tabOperations;
+
 	/**
 	 * Constructeur par dï¿½faut de la classe Compte
 	 */
@@ -51,17 +53,20 @@ public class Compte {
 	public void ajouterMontant(Double montant) {
 		if (montant > 0) {
 			this.solde += montant;
-            ajouterOperation(new Operation(new Date(),montant, TypeOperation.CREDITE));
+			ajouterOperation(new Operation(new Date(), montant,
+					TypeOperation.CREDITE));
 		}
 	}
 
-    /**
-     * operation a jouter a l'historique
-     * @param operation a ajouter
-     */
-    public void ajouterOperation(Operation operation){
-        tabOperations.add(operation);
-    }
+	/**
+	 * operation a jouter a l'historique
+	 * 
+	 * @param operation
+	 *            a ajouter
+	 */
+	public void ajouterOperation(Operation operation) {
+		tabOperations.add(operation);
+	}
 
 	/**
 	 * Procï¿½dure permettant de retirer un montant ï¿½ un compte bancaire
@@ -69,31 +74,35 @@ public class Compte {
 	 * @param montant
 	 *            : montant ï¿½ retirer (>=0)
 	 * @throws SoldeNegatifException
-	 *             : exeception lancï¿½e si le solde ï¿½ retirer est plus grand que
-	 *             les fonds du compte
+	 *             : exeception lancï¿½e si le solde ï¿½ retirer est plus grand
+	 *             que les fonds du compte
 	 */
-	public void RetirerMontant(Double montant) throws SoldeNegatifException {
-		if (montant > this.solde) {
+	public void RetirerMontant(double montant, double decouvert_autorise)
+			throws SoldeNegatifException {
+		if (montant > this.solde + decouvert_autorise) {
 			throw new SoldeNegatifException(
-					"Le montant Ã  retirer est trop important, les fonds ne sont pas suffisant ! ");
+					"Le montant à retirer est trop important, les fonds ne sont pas suffisant ! ");
 		} else {
-			if (montant > 0.0) {
-				this.solde -= montant;
-                ajouterOperation(new Operation(new Date(),montant, TypeOperation.DEBITE));
+			if (montant > this.solde) {
+				this.decouvert = montant - this.solde;
+				this.solde = 0.0;
+				ajouterOperation(new Operation(new Date(), montant,
+						TypeOperation.DEBITE));
 
-            }
+			}
+
 		}
 	}
 
-    /**
-     * Permet d'afficher l'historique
-     */
-    public void visualiserHistorique(){
-        Iterator<Operation> it = tabOperations.iterator();
-        while (it.hasNext()){
-            System.out.println(it.next());
-        }
-    }
+	/**
+	 * Permet d'afficher l'historique
+	 */
+	public void visualiserHistorique() {
+		Iterator<Operation> it = tabOperations.iterator();
+		while (it.hasNext()) {
+			System.out.println(it.next());
+		}
+	}
 
 	/**
 	 * Getter permettant de connaitre le solde du compte bancaire
@@ -126,7 +135,7 @@ public class Compte {
 	@Override
 	public String toString() {
 		return "Le compte " + this.getNumeroDeCompte() + " a "
-				+ this.getSolde() + " €";
+				+ this.getSolde() + " € | Découvert : " + this.decouvert + " €";
 
 	}
 
