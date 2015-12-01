@@ -179,15 +179,39 @@ public class Application {
 				break;
 
 			case 3:
-				File f = new File("monFichier.csv");
-				CSV csv = new CSV(f);
-				for (ArrayList<Operation> op : csv) {
-					if(recupererClient(op.getClient()) != null){
-						
+				CSV csv = new CSV("./monFichier.csv");
+				for (Operation op : csv.getCsv()) {
+					if (recupererClient(op.getClient()) != null) {
+						Client c = recupererClient(op.getClient());
+						ArrayList<Compte> listC = c.getCompteBancaires();
+						for (Compte compte : listC) {
+							if (compte.equals(op.getCompte())) {
+								switch (op.getType()) {
+								case DEBITE:
+									faireOperationViaFichier(c, compte, op.getMontant(), 1);
+									break;
+								case CREDITE:
+									faireOperationViaFichier(c, compte, op.getMontant(), 2);
+									break;
+
+								default:
+									break;
+								}
+
+							} else {
+								throw new IllegalArgumentException("Le client "
+										+ op.getClient()
+										+ " n'as pas de compte n° "
+										+ op.getCompte());
+							}
+						}
+
+					} else {
+						throw new IllegalArgumentException(
+								"Le format du numero de client est faux");
 					}
 				}
-				
-				
+
 				break;
 			case 4:
 				try {
@@ -402,6 +426,24 @@ public class Application {
 			break;
 		default:
 			System.err.println("Vous avez saisie n'importe quoi ! Try again ");
+			break;
+
+		}
+	}
+
+	public void faireOperationViaFichier(Client p, Compte c, Double m, int nb) {
+		switch (nb) {
+		case 1:
+			try {
+				c.RetirerMontant(m, p.getDECOUVERT_AUTORISE());
+			} catch (OperationException e) {
+				e.printStackTrace();
+			}
+			break;
+		case 2:
+			c.ajouterMontant(m);
+			break;
+		default:
 			break;
 
 		}
