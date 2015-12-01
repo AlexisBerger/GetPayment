@@ -12,7 +12,7 @@ import java.util.Iterator;
 import java.util.Scanner;
 
 import Exception.NombreDeCompteTropEleveException;
-import Exception.SoldeNegatifException;
+import Exception.OperationException;
 import modele.ClientParticulier;
 import modele.ClientProfessionnel;
 import modele.Compte;
@@ -43,28 +43,35 @@ public class Application {
 				.println("\t \t Bienvenue dans la gestion de votre compte Bancaire");
 		File monfichier = new File("monfichier.dat");
 		if (monfichier.exists()) {
+			FileInputStream fichier = null;
+			ObjectInputStream oos = null;
 			try {
-				FileInputStream fichier = new FileInputStream("monFichier.dat");
-				ObjectInputStream oos = new ObjectInputStream(fichier);
+				fichier = new FileInputStream("monFichier.dat");
+				oos = new ObjectInputStream(fichier);
 				Object read;
 				while ((read = oos.readObject()) != null) {
 					if (read instanceof ClientProfessionnel) {
-						System.out.println((ClientProfessionnel) read);
 						this.tabClients.add((ClientProfessionnel) read);
 					} else if (read instanceof ClientParticulier) {
-						System.out.println((ClientParticulier) read);
 						this.tabClients.add((ClientParticulier) read);
 					} else {
 						System.out.println("Erreur");
 					}
 				}
-				oos.close();
+
 			} catch (IOException e) {
-				e.printStackTrace();
-				System.out.println("Erreur de fichier");
+				System.out.println("Arrivé à la fin du fichier");
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 				System.out.println("Erreur de classe");
+			} finally {
+				try {
+					oos.close();
+					fichier.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
 			}
 			menu2();
 		} else {
@@ -93,10 +100,10 @@ public class Application {
 					}
 				}
 
-				Client p = new ClientProfessionnel("GP."
+				Client p = new ClientProfessionnel("P."
 						+ tab[0].toLowerCase().charAt(0)
 						+ tab[1].toLowerCase().charAt(0) + "12345", tab[0],
-						tab[1], age, "tot@mail.fr", "Orange", 123456789);
+						tab[1], age, "tot@mail.fr", "Orange", 123459679);
 
 				p.nouveauCompte(1000.00, "A");
 				p.nouveauCompte(100.0, "B");
@@ -172,6 +179,9 @@ public class Application {
 				break;
 
 			case 3:
+				
+				break;
+			case 4:
 				try {
 					FileOutputStream fichier = new FileOutputStream(
 							"monFichier.dat");
@@ -189,7 +199,7 @@ public class Application {
 			default:
 				break;
 			}
-		} while (res != 3);
+		} while (res != 4);
 	}
 
 	/**
@@ -202,7 +212,8 @@ public class Application {
 		System.out.println("-->");
 		System.out.println("1. Afficher tous les clients et leurs comptes.");
 		System.out.println("2. Faire une opération sur le compte d’un client.");
-		System.out.println("3. Quitter.");
+		System.out.println("3. Faire des opérations à partir d'un fichier.");
+		System.out.println("4. Quitter.");
 		System.out.println("Saisir votre choix : ");
 		Scanner sc = new Scanner(System.in);
 		if (sc.hasNextInt()) {
@@ -303,7 +314,7 @@ public class Application {
 					try {
 						compteSelect.RetirerMontant(sc.nextDouble(),
 								p.getDECOUVERT_AUTORISE());
-					} catch (SoldeNegatifException e) {
+					} catch (OperationException e) {
 						e.printStackTrace();
 					}
 				}

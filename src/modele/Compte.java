@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 
-import Exception.SoldeNegatifException;
+import Exception.OperationException;
 import application.Operation;
 import application.TypeOperation;
 
@@ -80,14 +80,14 @@ public class Compte implements Serializable{
 	 * 
 	 * @param montant
 	 *            : montant à retirer (>=0)
-	 * @throws SoldeNegatifException
+	 * @throws OperationException
 	 *             : exeception lancée si le solde à retirer est plus grand
 	 *             que les fonds du compte
 	 */
 	public void RetirerMontant(double montant, double decouvert_autorise)
-			throws SoldeNegatifException {
+			throws OperationException {
 		if (montant > this.solde + decouvert_autorise) {
-			throw new SoldeNegatifException(
+			throw new OperationException(
 					"Le montant à retirer est trop important, les fonds ne sont pas suffisant ! ");
 		} else {
 			if (montant > this.solde) {

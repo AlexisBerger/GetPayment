@@ -16,7 +16,6 @@ import java.util.Scanner;
 
 public class Client implements Serializable {
 
-
 	/**
 	 * 
 	 */
@@ -61,6 +60,7 @@ public class Client implements Serializable {
 
 		this.DECOUVERT_AUTORISE = decouv;
 		this.nbCompte = 1;
+
 		while (!verifFormatNumeroDeCompte(num)) {
 			System.err.println("Numéro de compte non valide pour " + nom + " "
 					+ prenom + " ! \n Format : GP.xxNNNNN");
@@ -68,6 +68,7 @@ public class Client implements Serializable {
 			Scanner sc = new Scanner(System.in);
 			num = sc.next();
 		}
+
 		this.numero = num;
 		this.nom = nom;
 		this.prenom = prenom;
@@ -115,7 +116,8 @@ public class Client implements Serializable {
 	 *            : le numéro de compte a vérifier
 	 * @return Vrai si le numéro à le bon format (GP.fd12345), faux sinon
 	 */
-	public static boolean verifFormatNumeroDeCompte(String num) {
+	public static boolean verifFormatNumeroDeCompte(String num)
+			throws IllegalArgumentException {
 		if (num.length() == 10) {
 			if (num.charAt(0) == 'G' && num.charAt(1) == 'P'
 					&& num.charAt(2) == '.') {
