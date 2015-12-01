@@ -21,7 +21,7 @@ public class CSV{
         try {
             String line ="";
             int i = 0;
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("file"));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
             while ((line = bufferedReader.readLine())!=null){
                 String compte = "";
                 String client ="";
