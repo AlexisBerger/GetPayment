@@ -199,10 +199,10 @@ public class Application {
 								}
 
 							} else {
-								throw new IllegalArgumentException("Le client "
+								/*throw new IllegalArgumentException("Le client "
 										+ op.getClient()
 										+ " n'as pas de compte n° "
-										+ op.getCompte());
+										+ op.getCompte());*/
 							}
 						}
 
