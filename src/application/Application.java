@@ -179,6 +179,14 @@ public class Application {
 				break;
 
 			case 3:
+				File f = new File("monFichier.csv");
+				CSV csv = new CSV(f);
+				for (ArrayList<Operation> op : csv) {
+					if(recupererClient(op.getClient()) != null){
+						
+					}
+				}
+				
 				
 				break;
 			case 4:
