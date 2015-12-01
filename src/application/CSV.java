@@ -17,7 +17,8 @@ public class CSV{
     private ArrayList<Operation> csv;
 
     public CSV(String file){
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat();
+        csv = new ArrayList<Operation>();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
             String line ="";
             int i = 0;
