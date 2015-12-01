@@ -41,6 +41,16 @@ public class Operation {
 		this.montant = montant;
 		this.type = type;
 	}
+	
+	public Operation(String compte, String client, Date dateOperation, double montant, TypeOperation type) {
+		this.setCompte(compte);
+		this.setClient(client);
+		this.dateOperation = dateOperation;
+		this.montant = montant;
+		this.type = type;
+	}
+	
+	
 
 	/**
 	 * Getter permettant de connaitre la date de l'op�ration
@@ -102,6 +112,34 @@ public class Operation {
 	@Override
 	public String toString() {
 		return shortDateFormat.format(this.dateOperation) + " ; " + this.montant + " ; " + this.type;
+	}
+
+	/**
+	 * @return the client
+	 */
+	public String getClient() {
+		return client;
+	}
+
+	/**
+	 * @param client the client to set
+	 */
+	public void setClient(String client) {
+		this.client = client;
+	}
+
+	/**
+	 * @return the compte
+	 */
+	public String getCompte() {
+		return compte;
+	}
+
+	/**
+	 * @param compte the compte to set
+	 */
+	public void setCompte(String compte) {
+		this.compte = compte;
 	}
 
 }
