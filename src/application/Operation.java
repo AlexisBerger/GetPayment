@@ -1,5 +1,6 @@
 package application;
 
+import javax.lang.model.element.NestingKind;
 import java.text.DateFormat;
 import java.util.Date;
 
@@ -11,6 +12,8 @@ import java.util.Date;
  */
 public class Operation {
 
+	private String compte;
+	private String client;
 	private Date dateOperation;
 	private double montant;
 	private TypeOperation type;
