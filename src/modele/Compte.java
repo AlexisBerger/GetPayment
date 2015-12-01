@@ -159,7 +159,7 @@ public class Compte implements Serializable{
 	@Override
 	public String toString() {
 		return "Le compte " + this.getNumeroDeCompte() + " a "
-				+ this.getSolde() + " ï¿½ | Dï¿½couvert : " + this.decouvert + " ï¿½";
+				+ this.getSolde() + " € | Découvert : " + this.decouvert + " €";
 
 	}
 

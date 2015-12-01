@@ -74,6 +74,7 @@ public class Application {
 
 			}
 			menu2();
+
 		} else {
 			System.out
 					.println("Aprennons d'abord a nous connaitre \nVous êtes (Nom + Prénom) ? ");
@@ -139,97 +140,107 @@ public class Application {
 		Scanner sc = new Scanner(System.in);
 		int res = 0;
 		do {
-			res = menu();
+			try {
 
-			switch (res) {
-			case 1:
-				for (Client tpers : this.tabClients) {
-					tpers.visualiserCompte();
-				}
-				break;
-			case 2:
-				String numeroClient = null;
-				do {
-					numeroClient = selectClient();
-					if (recupererClient(numeroClient) == null) {
-						System.err
-								.println("Le numéro de client n'existe pas !\n");
+				res = menu();
+
+				switch (res) {
+				case 1:
+					for (Client tpers : this.tabClients) {
+						tpers.visualiserCompte();
 					}
-				} while (recupererClient(numeroClient) == null);
-				int nb = 0;
-				do {
-					System.out.println();
-					System.out.println("\t1. Voir le solde du compte");
-					System.out.println("\t2. Retirer un montant");
-					System.out.println("\t3. Faire un apport");
-					System.out.println("\t4. Afficher historique");
-					System.out.println("\t5. Ajouter un compte");
-					System.out.println("\t6. Quitter");
-					System.out.println();
-					sc = new Scanner(System.in);
+					break;
+				case 2:
+					String numeroClient = null;
+					do {
+						numeroClient = selectClient();
+						if (recupererClient(numeroClient) == null) {
+							System.err
+									.println("Le numéro de client n'existe pas !\n");
+						}
+					} while (recupererClient(numeroClient) == null);
+					int nb = 0;
+					do {
+						System.out.println();
+						System.out.println("\t1. Voir le solde du compte");
+						System.out.println("\t2. Retirer un montant");
+						System.out.println("\t3. Faire un apport");
+						System.out.println("\t4. Afficher historique");
+						System.out.println("\t5. Ajouter un compte");
+						System.out.println("\t6. Quitter");
+						System.out.println();
+						sc = new Scanner(System.in);
 
-					if (sc.hasNextInt()) {
-						nb = sc.nextInt();
-					} else {
-						System.err.println("Il faut saisir un nombre !");
-					}
-
-					faireOperation(recupererClient(numeroClient), nb);
-				} while (nb != 6);
-				break;
-
-			case 3:
-				CSV csv = new CSV("./monFichier.csv");
-				for (Operation op : csv.getCsv()) {
-					if (recupererClient(op.getClient()) != null) {
-						Client c = recupererClient(op.getClient());
-						ArrayList<Compte> listC = c.getCompteBancaires();
-						for (Compte compte : listC) {
-							if (compte.equals(op.getCompte())) {
-								switch (op.getType()) {
-								case DEBITE:
-									faireOperationViaFichier(c, compte, op.getMontant(), 1);
-									break;
-								case CREDITE:
-									faireOperationViaFichier(c, compte, op.getMontant(), 2);
-									break;
-
-								default:
-									break;
-								}
-
-							} else {
-								/*throw new IllegalArgumentException("Le client "
-										+ op.getClient()
-										+ " n'as pas de compte n° "
-										+ op.getCompte());*/
-							}
+						if (sc.hasNextInt()) {
+							nb = sc.nextInt();
+						} else {
+							System.err.println("Il faut saisir un nombre !");
 						}
 
-					} else {
-						throw new IllegalArgumentException(
-								"Le format du numero de client est faux");
-					}
-				}
+						faireOperation(recupererClient(numeroClient), nb);
+					} while (nb != 6);
+					break;
 
-				break;
-			case 4:
-				try {
-					FileOutputStream fichier = new FileOutputStream(
-							"monFichier.dat");
-					ObjectOutputStream oos = new ObjectOutputStream(fichier);
-					for (Client client : tabClients) {
-						oos.writeObject(client);
-					}
-					oos.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-					System.out.println("Erreur de fichier");
-				}
-				break;
+				case 3:
+					boolean erreur = true;
+					CSV csv = new CSV("./monFichier.csv");
+					for (Operation op : csv.getCsv()) {
+						if (recupererClient(op.getClient()) != null) {
+							Client c = recupererClient(op.getClient());
+							ArrayList<Compte> listC = c.getCompteBancaires();
+							for (Compte compte : listC) {
+								if (compte.getNumeroDeCompte().equals(
+										op.getCompte())) {
+									erreur = false;
+									switch (op.getType()) {
+									case DEBITE:
+										faireOperationViaFichier(c, compte,
+												op.getMontant(), 1);
+										break;
+									case CREDITE:
+										faireOperationViaFichier(c, compte,
+												op.getMontant(), 2);
+										break;
+									default:
+										break;
+									}
+								}
+							}
+							if (erreur) {
+								throw new IllegalArgumentException("Le client "
+										+ op.getClient()
+										+ " n'as pas de compte n° "
+										+ op.getCompte());
 
-			default:
-				break;
+							}
+
+						} else {
+							throw new IllegalArgumentException(
+									"Le format du numero de client est faux");
+						}
+					}
+
+					break;
+				case 4:
+					try {
+						FileOutputStream fichier = new FileOutputStream(
+								"monFichier.dat");
+						ObjectOutputStream oos = new ObjectOutputStream(fichier);
+						for (Client client : tabClients) {
+							oos.writeObject(client);
+						}
+						oos.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+						System.out.println("Erreur de fichier");
+					}
+					break;
+
+				default:
+					break;
+				}
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
 			}
 		} while (res != 4);
 	}
