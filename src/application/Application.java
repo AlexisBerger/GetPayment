@@ -1,5 +1,12 @@
 package application;
 
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -34,95 +41,155 @@ public class Application {
 	public void demarrer() {
 		System.out
 				.println("\t \t Bienvenue dans la gestion de votre compte Bancaire");
-		System.out
-				.println("Aprennons d'abord a nous connaitre \nVous êtes (Nom + Prénom) ? ");
-		Scanner sc = new Scanner(System.in);
-		String pers = sc.nextLine();
-		String tab[] = pers.split("\\s");
-
-		try {
-
-			System.out.println("Bien " + tab[1] + " " + tab[0]
-					+ ", sans indiscrétion pourrais-je connaitre votre âge ? ");
-
-			int age = -1;
-			while (age < 0) {
-				sc = new Scanner(System.in);
-				if (sc.hasNextInt()) {
-					age = sc.nextInt();
-				} else {
-					System.out.println("Faites un petit effort :) ");
+		File monfichier = new File("monfichier.dat");
+		if (monfichier.exists()) {
+			try {
+				FileInputStream fichier = new FileInputStream("monFichier.dat");
+				ObjectInputStream oos = new ObjectInputStream(fichier);
+				Object read;
+				while ((read = oos.readObject()) != null) {
+					if (read instanceof ClientProfessionnel) {
+						System.out.println((ClientProfessionnel) read);
+						this.tabClients.add((ClientProfessionnel) read);
+					} else if (read instanceof ClientParticulier) {
+						System.out.println((ClientParticulier) read);
+						this.tabClients.add((ClientParticulier) read);
+					} else {
+						System.out.println("Erreur");
+					}
 				}
+				oos.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+				System.out.println("Erreur de fichier");
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				System.out.println("Erreur de classe");
+			}
+			menu2();
+		} else {
+			System.out
+					.println("Aprennons d'abord a nous connaitre \nVous êtes (Nom + Prénom) ? ");
+			Scanner sc = new Scanner(System.in);
+			String pers = sc.nextLine();
+			String tab[] = pers.split("\\s");
+
+			try {
+
+				System.out
+						.println("Bien "
+								+ tab[1]
+								+ " "
+								+ tab[0]
+								+ ", sans indiscrétion pourrais-je connaitre votre âge ? ");
+
+				int age = -1;
+				while (age < 0) {
+					sc = new Scanner(System.in);
+					if (sc.hasNextInt()) {
+						age = sc.nextInt();
+					} else {
+						System.out.println("Faites un petit effort :) ");
+					}
+				}
+
+				Client p = new ClientProfessionnel("GP."
+						+ tab[0].toLowerCase().charAt(0)
+						+ tab[1].toLowerCase().charAt(0) + "12345", tab[0],
+						tab[1], age, "tot@mail.fr", "Orange", 123456789);
+
+				p.nouveauCompte(1000.00, "A");
+				p.nouveauCompte(100.0, "B");
+				p.nouveauCompte(10.0, "C");
+
+				Client p1 = new ClientParticulier("GP.aj98765", "AiMARRE",
+						"Jean", 12, "AiMARRE@mail.fr");
+				p1.nouveauCompte(1000.00, "A");
+				p1.nouveauCompte(100.0, "B");
+				p1.nouveauCompte(10.0, "C");
+
+				Client p2 = new ClientParticulier("GP.ch98765", "COVERT",
+						"Harry", 14, "COVERT@mail.fr");
+				p2.nouveauCompte(1000.00, "A");
+				p2.nouveauCompte(100.0, "B");
+				p2.nouveauCompte(10.0, "C");
+
+				this.aouterClient(p);
+				this.aouterClient(p1);
+				this.aouterClient(p2);
+				menu2();
+
+			} catch (IndexOutOfBoundsException e) {
+				System.out
+						.println("Il faut saisir le nom ET le prénom pour l'ouverture d'un compte bancaire. \nRechargez l'application");
 			}
 
-			Client p = new ClientProfessionnel("GP."
-					+ tab[0].toLowerCase().charAt(0)
-					+ tab[1].toLowerCase().charAt(0) + "12345", tab[0], tab[1],
-					age, "tot@mail.fr", "Orange", 123467);
-
-			p.nouveauCompte(1000.00, "A");
-			p.nouveauCompte(100.0, "B");
-			p.nouveauCompte(10.0, "C");
-
-			Client p1 = new ClientParticulier("GP.aj98765", "AiMARRE", "Jean",
-					12, "AiMARRE@mail.fr");
-			p1.nouveauCompte(1000.00, "A");
-			p1.nouveauCompte(100.0, "B");
-			p1.nouveauCompte(10.0, "C");
-
-			Client p2 = new ClientParticulier("GP.ch98765", "COVERT", "Harry",
-					14, "COVERT@mail.fr");
-			p2.nouveauCompte(1000.00, "A");
-			p2.nouveauCompte(100.0, "B");
-			p2.nouveauCompte(10.0, "C");
-
-			this.aouterClient(p);
-			this.aouterClient(p1);
-			this.aouterClient(p2);
-			int res = 0;
-			do {
-				res = menu();
-
-				switch (res) {
-				case 1:
-					for (Client tpers : this.tabClients) {
-						tpers.visualiserCompte();
-					}
-					break;
-				case 2:
-					String numeroClient = selectClient();
-					int nb = 0;
-					do {
-						System.out.println();
-						System.out.println("\t1. Voir le solde du compte");
-						System.out.println("\t2. Retirer un montant");
-						System.out.println("\t3. Faire un apport");
-						System.out.println("\t4. Afficher historique");
-						System.out.println("\t5. Ajouter un compte");
-						System.out.println("\t6. Quitter");
-						System.out.println();
-						sc = new Scanner(System.in);
-
-						if (sc.hasNextInt()) {
-							nb = sc.nextInt();
-						} else {
-							System.err.println("Il faut saisir un nombre !");
-						}
-
-						faireOperation(recupererClient(numeroClient), nb);
-					} while (nb != 6);
-					break;
-
-				default:
-					break;
-				}
-
-			} while (res != 3);
-		} catch (IndexOutOfBoundsException e) {
-			System.out
-					.println("Il faut saisir le nom ET le prénom pour l'ouverture d'un compte bancaire. \nRechargez l'application");
 		}
 
+	}
+
+	public void menu2() {
+		Scanner sc = new Scanner(System.in);
+		int res = 0;
+		do {
+			res = menu();
+
+			switch (res) {
+			case 1:
+				for (Client tpers : this.tabClients) {
+					tpers.visualiserCompte();
+				}
+				break;
+			case 2:
+				String numeroClient = null;
+				do {
+					numeroClient = selectClient();
+					if (recupererClient(numeroClient) == null) {
+						System.err
+								.println("Le numéro de client n'existe pas !\n");
+					}
+				} while (recupererClient(numeroClient) == null);
+				int nb = 0;
+				do {
+					System.out.println();
+					System.out.println("\t1. Voir le solde du compte");
+					System.out.println("\t2. Retirer un montant");
+					System.out.println("\t3. Faire un apport");
+					System.out.println("\t4. Afficher historique");
+					System.out.println("\t5. Ajouter un compte");
+					System.out.println("\t6. Quitter");
+					System.out.println();
+					sc = new Scanner(System.in);
+
+					if (sc.hasNextInt()) {
+						nb = sc.nextInt();
+					} else {
+						System.err.println("Il faut saisir un nombre !");
+					}
+
+					faireOperation(recupererClient(numeroClient), nb);
+				} while (nb != 6);
+				break;
+
+			case 3:
+				try {
+					FileOutputStream fichier = new FileOutputStream(
+							"monFichier.dat");
+					ObjectOutputStream oos = new ObjectOutputStream(fichier);
+					for (Client client : tabClients) {
+						oos.writeObject(client);
+					}
+					oos.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+					System.out.println("Erreur de fichier");
+				}
+				break;
+
+			default:
+				break;
+			}
+		} while (res != 3);
 	}
 
 	/**

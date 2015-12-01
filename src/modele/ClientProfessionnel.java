@@ -10,6 +10,10 @@ import java.util.Scanner;
  */
 public class ClientProfessionnel extends Client {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2416314126928449030L;
 	private final static double DECOUVERT_AUTORISE = 0.00;
 	private String societe;
 	private int siren;

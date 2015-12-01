@@ -8,6 +8,10 @@ package modele;
  */
 public class ClientParticulier extends Client {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4375376690855691578L;
 	private final static double DECOUVERT_AUTORISE = 500.00;
 
 	/**
@@ -69,6 +73,7 @@ public class ClientParticulier extends Client {
 
 	@Override
 	public String toString() {
-		return super.toString() + " - " + getMontantAbonnement()+ "€ de frais de compte";
+		return super.toString() + " - " + getMontantAbonnement()
+				+ "€ de frais de compte";
 	}
 }

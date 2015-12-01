@@ -1,5 +1,6 @@
 package modele;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -14,7 +15,7 @@ import application.TypeOperation;
  * @author Quentin
  * 
  */
-public class Compte {
+public class Compte implements Serializable{
 
 	private final Double soldeDeBase = 100.00;
 	private String numeroDeCompte;

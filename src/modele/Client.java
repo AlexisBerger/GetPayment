@@ -1,5 +1,6 @@
 package modele;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,8 +14,13 @@ import java.util.Scanner;
  * 
  */
 
-public class Client {
+public class Client implements Serializable {
 
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7292297928039732026L;
 	private final double DECOUVERT_AUTORISE;
 	private int nbCompte;
 	private String numero;
