@@ -10,7 +10,7 @@ import application.Operation;
 import application.TypeOperation;
 
 /**
- * Class permettan de créer un compte bancaire
+ * Class permettan de crï¿½er un compte bancaire
  * 
  * @author Quentin
  * 
@@ -25,7 +25,7 @@ public class Compte implements Serializable{
 	private ArrayList<Operation> tabOperations;
 
 	/**
-	 * Constructeur par défaut de la classe Compte
+	 * Constructeur par dï¿½faut de la classe Compte
 	 */
 	public Compte() {
 
@@ -37,7 +37,7 @@ public class Compte implements Serializable{
 	 * @param montantInit
 	 *            : montant initial du compte bancaire
 	 * @param num
-	 *            : numéro du compte bancaire
+	 *            : numï¿½ro du compte bancaire
 	 */
 
 	public Compte(Double montantInit, String num, Date d) {
@@ -52,10 +52,10 @@ public class Compte implements Serializable{
 	}
 
 	/**
-	 * Procédure permettant d'ajouter un montant à un compte bancaire
+	 * Procï¿½dure permettant d'ajouter un montant ï¿½ un compte bancaire
 	 * 
 	 * @param montant
-	 *            : montant à ajouter (>=0)
+	 *            : montant ï¿½ ajouter (>=0)
 	 */
 	public void ajouterMontant(Double montant) {
 		if (montant > 0) {
@@ -76,24 +76,24 @@ public class Compte implements Serializable{
 	}
 
 	/**
-	 * Procédure permettant de retirer un montant à un compte bancaire
+	 * Procï¿½dure permettant de retirer un montant ï¿½ un compte bancaire
 	 * 
 	 * @param montant
-	 *            : montant à retirer (>=0)
+	 *            : montant ï¿½ retirer (>=0)
 	 * @throws OperationException
-	 *             : exeception lancée si le solde à retirer est plus grand
+	 *             : exeception lancï¿½e si le solde ï¿½ retirer est plus grand
 	 *             que les fonds du compte
 	 */
 	public void RetirerMontant(double montant, double decouvert_autorise)
 			throws OperationException {
 		if (montant > this.solde + decouvert_autorise) {
 			throw new OperationException(
-					"Le montant à retirer est trop important, les fonds ne sont pas suffisant ! ");
+					"Le montant ï¿½ retirer est trop important, les fonds ne sont pas suffisant ! ");
 		} else {
 			if (montant > this.solde) {
 				this.decouvert = montant - this.solde;
 				this.solde = 0.0;
-				System.err.println("Attention vous avez un découvert");
+				System.err.println("Attention vous avez un dï¿½couvert");
 				ajouterOperation(new Operation(new Date(), montant,
 						TypeOperation.DEBITE));
 
@@ -109,10 +109,10 @@ public class Compte implements Serializable{
 	}
 
 	/**
-	 * Fonction permettant de connaitre le nombre d'opération effectuées sur un
+	 * Fonction permettant de connaitre le nombre d'opï¿½ration effectuï¿½es sur un
 	 * compte
 	 * 
-	 * @return le nombre d'opération sur un compte
+	 * @return le nombre d'opï¿½ration sur un compte
 	 */
 	public int getNbOperation() {
 		return this.tabOperations.size();
@@ -140,7 +140,7 @@ public class Compte implements Serializable{
 	/**
 	 * Getter permettant de connaitre le numï¿½ro du compte bancaire
 	 * 
-	 * @return le numéro du compte bancaire
+	 * @return le numï¿½ro du compte bancaire
 	 */
 	public String getNumeroDeCompte() {
 		return numeroDeCompte;
@@ -150,7 +150,7 @@ public class Compte implements Serializable{
 	 * Setter permettant de dï¿½finir le numï¿½ro du compte bancaire
 	 * 
 	 * @param numeroDeCompte
-	 *            : numéro du compte bancaire à définir
+	 *            : numï¿½ro du compte bancaire ï¿½ dï¿½finir
 	 */
 	public void setNumeroDeCompte(String numeroDeCompte) {
 		this.numeroDeCompte = numeroDeCompte;
@@ -159,12 +159,12 @@ public class Compte implements Serializable{
 	@Override
 	public String toString() {
 		return "Le compte " + this.getNumeroDeCompte() + " a "
-				+ this.getSolde() + " € | Découvert : " + this.decouvert + " €";
+				+ this.getSolde() + " ï¿½ | Dï¿½couvert : " + this.decouvert + " ï¿½";
 
 	}
 
 	/**
-	 * Getter permettant de connaitre la date de création
+	 * Getter permettant de connaitre la date de crï¿½ation
 	 * 
 	 * @return the dateCreation
 	 */
@@ -175,7 +175,7 @@ public class Compte implements Serializable{
 	}
 
 	/**
-	 * Setter permettant de définir la date de création
+	 * Setter permettant de dï¿½finir la date de crï¿½ation
 	 * 
 	 * @param dateCreation
 	 *            the dateCreation to set
