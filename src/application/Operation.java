@@ -1,6 +1,8 @@
 package application;
 
 import javax.lang.model.element.NestingKind;
+
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.Date;
 
@@ -10,8 +12,12 @@ import java.util.Date;
  * @author Quentin
  * 
  */
-public class Operation {
+public class Operation implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7631545766176103232L;
 	private String compte;
 	private String client;
 	private Date dateOperation;

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 
+import Exception.FormatFichierOperation;
 import Exception.NombreDeCompteTropEleveException;
 import Exception.OperationException;
 import modele.ClientParticulier;
@@ -101,7 +102,7 @@ public class Application {
 					}
 				}
 
-				Client p = new ClientProfessionnel("P."
+				Client p = new ClientProfessionnel("GP."
 						+ tab[0].toLowerCase().charAt(0)
 						+ tab[1].toLowerCase().charAt(0) + "12345", tab[0],
 						tab[1], age, "tot@mail.fr", "Orange", 123459679);
@@ -140,51 +141,51 @@ public class Application {
 		Scanner sc = new Scanner(System.in);
 		int res = 0;
 		do {
-			try {
 
-				res = menu();
+			res = menu();
 
-				switch (res) {
-				case 1:
-					for (Client tpers : this.tabClients) {
-						tpers.visualiserCompte();
+			switch (res) {
+			case 1:
+				for (Client tpers : this.tabClients) {
+					tpers.visualiserCompte();
+				}
+				break;
+			case 2:
+				String numeroClient = null;
+				do {
+					numeroClient = selectClient();
+					if (recupererClient(numeroClient) == null) {
+						System.err
+								.println("Le numéro de client n'existe pas !\n");
 					}
-					break;
-				case 2:
-					String numeroClient = null;
-					do {
-						numeroClient = selectClient();
-						if (recupererClient(numeroClient) == null) {
-							System.err
-									.println("Le numéro de client n'existe pas !\n");
-						}
-					} while (recupererClient(numeroClient) == null);
-					int nb = 0;
-					do {
-						System.out.println();
-						System.out.println("\t1. Voir le solde du compte");
-						System.out.println("\t2. Retirer un montant");
-						System.out.println("\t3. Faire un apport");
-						System.out.println("\t4. Afficher historique");
-						System.out.println("\t5. Ajouter un compte");
-						System.out.println("\t6. Quitter");
-						System.out.println();
-						sc = new Scanner(System.in);
+				} while (recupererClient(numeroClient) == null);
+				int nb = 0;
+				do {
+					System.out.println();
+					System.out.println("\t1. Voir le solde du compte");
+					System.out.println("\t2. Retirer un montant");
+					System.out.println("\t3. Faire un apport");
+					System.out.println("\t4. Afficher historique");
+					System.out.println("\t5. Ajouter un compte");
+					System.out.println("\t6. Quitter");
+					System.out.println();
+					sc = new Scanner(System.in);
 
-						if (sc.hasNextInt()) {
-							nb = sc.nextInt();
-						} else {
-							System.err.println("Il faut saisir un nombre !");
-						}
+					if (sc.hasNextInt()) {
+						nb = sc.nextInt();
+					} else {
+						System.err.println("Il faut saisir un nombre !");
+					}
 
-						faireOperation(recupererClient(numeroClient), nb);
-					} while (nb != 6);
-					break;
+					faireOperation(recupererClient(numeroClient), nb);
+				} while (nb != 6);
+				break;
 
-				case 3:
-					boolean erreur = true;
-					CSV csv = new CSV("./monFichier.csv");
-					for (Operation op : csv.getCsv()) {
+			case 3:
+				boolean erreur = true;
+				CSV csv = new CSV("./monFichier.csv");
+				for (Operation op : csv.getCsv()) {
+					try {
 						if (recupererClient(op.getClient()) != null) {
 							Client c = recupererClient(op.getClient());
 							ArrayList<Compte> listC = c.getCompteBancaires();
@@ -207,7 +208,7 @@ public class Application {
 								}
 							}
 							if (erreur) {
-								throw new IllegalArgumentException("Le client "
+								throw new FormatFichierOperation("Le client "
 										+ op.getClient()
 										+ " n'as pas de compte n° "
 										+ op.getCompte());
@@ -215,33 +216,34 @@ public class Application {
 							}
 
 						} else {
-							throw new IllegalArgumentException(
+							throw new FormatFichierOperation(
 									"Le format du numero de client est faux");
 						}
-					}
-
-					break;
-				case 4:
-					try {
-						FileOutputStream fichier = new FileOutputStream(
-								"monFichier.dat");
-						ObjectOutputStream oos = new ObjectOutputStream(fichier);
-						for (Client client : tabClients) {
-							oos.writeObject(client);
-						}
-						oos.close();
-					} catch (IOException e) {
+					} catch (FormatFichierOperation e) {
 						e.printStackTrace();
-						System.out.println("Erreur de fichier");
 					}
-					break;
-
-				default:
-					break;
 				}
-			} catch (IllegalArgumentException e) {
-				e.printStackTrace();
+
+				break;
+			case 4:
+				try {
+					FileOutputStream fichier = new FileOutputStream(
+							"monFichier.dat");
+					ObjectOutputStream oos = new ObjectOutputStream(fichier);
+					for (Client client : tabClients) {
+						oos.writeObject(client);
+					}
+					oos.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+					System.out.println("Erreur de fichier");
+				}
+				break;
+
+			default:
+				break;
 			}
+
 		} while (res != 4);
 	}
 
