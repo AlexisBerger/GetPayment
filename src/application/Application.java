@@ -41,12 +41,26 @@ public class Application {
 	public void demarrer() {
 		System.out
 				.println("\t \t Bienvenue dans la gestion de votre compte Bancaire");
-		File monfichier = new File("monfichier.dat");
+		boolean existe = false;
+		int compteur = 1;
+		File monfichier = null;
+		while (!existe) {
+			monfichier = new File("archives/sauvegarde" + compteur + ".dat");
+			if (monfichier.exists()) {
+				compteur++;
+			} else {
+				existe = true;
+			}
+		}
+		monfichier = new File("archives/sauvegarde" + (compteur - 1) + ".dat");
 		if (monfichier.exists()) {
 			FileInputStream fichier = null;
 			ObjectInputStream oos = null;
 			try {
-				fichier = new FileInputStream("monFichier.dat");
+				fichier = new FileInputStream(monfichier);
+				System.out
+						.println("En train de lire le fichier archives/sauvegarde"
+								+ (compteur - 1) + ".dat");
 				oos = new ObjectInputStream(fichier);
 				Object read;
 				while ((read = oos.readObject()) != null) {
@@ -118,7 +132,7 @@ public class Application {
 
 				Client p2 = new ClientParticulier("GP.ch98765", "COVERT",
 						"Harry", 14, "COVERT@mail.fr");
-				p2.nouveauCompte(1000.00, "A");
+				p2.nouveauCompte(100000.00, "A");
 				p2.nouveauCompte(100.0, "B");
 				p2.nouveauCompte(10.0, "C");
 
@@ -225,9 +239,21 @@ public class Application {
 
 				break;
 			case 4:
+				boolean existe = false;
+				int compteur = 1;
+				while (!existe) {
+					File monfichier = new File("archives/sauvegarde" + compteur
+							+ ".dat");
+					if (monfichier.exists()) {
+						compteur++;
+					} else {
+						existe = true;
+					}
+				}
+
 				try {
 					FileOutputStream fichier = new FileOutputStream(
-							"monFichier.dat");
+							"archives/sauvegarde" + compteur + ".dat");
 					ObjectOutputStream oos = new ObjectOutputStream(fichier);
 					for (Client client : tabClients) {
 						oos.writeObject(client);

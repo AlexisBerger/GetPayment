@@ -14,7 +14,7 @@ import java.util.Scanner;
  * 
  */
 
-public class Client implements Serializable {
+public abstract class Client implements Serializable {
 
 	/**
 	 * 
@@ -382,5 +382,7 @@ public class Client implements Serializable {
 	public double getDECOUVERT_AUTORISE() {
 		return DECOUVERT_AUTORISE;
 	}
+	
+	public abstract double getMontantAbonnement();
 
 }
