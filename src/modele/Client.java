@@ -14,7 +14,7 @@ import java.util.Scanner;
  * 
  */
 
-public abstract class Client implements Serializable {
+public abstract class Client implements Serializable, Cloneable {
 
 	/**
 	 * 
@@ -382,7 +382,17 @@ public abstract class Client implements Serializable {
 	public double getDECOUVERT_AUTORISE() {
 		return DECOUVERT_AUTORISE;
 	}
-	
+
+	public Object clone() {
+		Client c = null;
+		try {
+			c = (Client) super.clone();
+		} catch (CloneNotSupportedException cnse) {
+			cnse.printStackTrace(System.err);
+		}
+		return c;
+	}
+
 	public abstract double getMontantAbonnement();
 
 }

@@ -338,7 +338,7 @@ public class Application {
 				break;
 			}
 
-		} while (res != 4);
+		} while (res != 5);
 	}
 
 	/**
