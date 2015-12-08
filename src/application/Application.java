@@ -35,6 +35,10 @@ public class Application {
 
 	}
 
+	public void chargerFichier() {
+
+	}
+
 	/**
 	 * Procédure permettant de lancer/démarrer l'application
 	 */
@@ -239,6 +243,71 @@ public class Application {
 
 				break;
 			case 4:
+				boolean ex = false;
+				int compt = 1;
+				File monfic = null;
+				while (!ex) {
+					monfic = new File("archives/sauvegarde" + compt + ".dat");
+					if (monfic.exists()) {
+
+						System.out.println("Sauvegarde n°" + compt + " : "
+								+ "archives/sauvegarde" + compt + ".dat");
+						compt++;
+					} else {
+						ex = true;
+					}
+				}
+				Scanner scan = new Scanner(System.in);
+				System.out
+						.println("Saisir le numéro de la sauvegarde a charger : ");
+				int fichierAcharger = -1;
+				if (scan.hasNextInt()) {
+					fichierAcharger = scan.nextInt();
+				} else {
+					System.out.println("Il faut saisir un nombre");
+				}
+
+				File fic = new File("archives/sauvegarde" + fichierAcharger + ".dat");
+				if (fic.exists()) {
+					FileInputStream fichier = null;
+					ObjectInputStream oos = null;
+					try {
+						fichier = new FileInputStream(fic);
+						System.out
+								.println("En train de lire le fichier archives/sauvegarde"
+										+fichierAcharger  + ".dat");
+						oos = new ObjectInputStream(fichier);
+						Object read;
+						this.tabClients = new ArrayList<>();
+						while ((read = oos.readObject()) != null) {
+							if (read instanceof ClientProfessionnel) {
+								this.tabClients.add((ClientProfessionnel) read);
+							} else if (read instanceof ClientParticulier) {
+								this.tabClients.add((ClientParticulier) read);
+							} else {
+								System.out.println("Erreur");
+							}
+						}
+
+					} catch (IOException e) {
+						System.out.println("Arrivé à la fin du fichier");
+					} catch (ClassNotFoundException e) {
+						e.printStackTrace();
+						System.out.println("Erreur de classe");
+					} finally {
+						try {
+							oos.close();
+							fichier.close();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+
+					}
+					menu2();
+				}
+				
+				break;
+			case 5:
 				boolean existe = false;
 				int compteur = 1;
 				while (!existe) {
@@ -283,7 +352,8 @@ public class Application {
 		System.out.println("1. Afficher tous les clients et leurs comptes.");
 		System.out.println("2. Faire une opération sur le compte d’un client.");
 		System.out.println("3. Faire des opérations à partir d'un fichier.");
-		System.out.println("4. Quitter.");
+		System.out.println("4- Revenir à une sauvegarde précédente.");
+		System.out.println("5. Quitter.");
 		System.out.println("Saisir votre choix : ");
 		Scanner sc = new Scanner(System.in);
 		if (sc.hasNextInt()) {
