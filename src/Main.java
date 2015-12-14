@@ -14,6 +14,7 @@ public class Main implements Cloneable {
 		Application ap = new Application();
 		ap.demarrer();		
 		
+		//permet de tester l'interface Cloneable 
 		Client p1 = new ClientParticulier("GP.aj98765", "AiMARRE",
 				"Jean", 12, "AiMARRE@mail.fr");
 		p1.nouveauCompte(1000.00, "A");

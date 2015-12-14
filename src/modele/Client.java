@@ -8,7 +8,7 @@ import java.util.Iterator;
 import java.util.Scanner;
 
 /**
- * Classe permettant de créer une personne
+ * Classe permettant de créer un client
  * 
  * @author Quentin
  * 
@@ -30,8 +30,7 @@ public abstract class Client implements Serializable, Cloneable {
 	private ArrayList<Compte> compteBancaires = new ArrayList<Compte>();
 
 	@SuppressWarnings("unused")
-	private DateFormat shortDateFormat = DateFormat.getDateTimeInstance(
-			DateFormat.SHORT, DateFormat.SHORT);
+	private DateFormat shortDateFormat = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
 
 	/**
 	 * Constructeur par défaut de la classe personne
@@ -53,17 +52,18 @@ public abstract class Client implements Serializable, Cloneable {
 	 *            : âge de la personne
 	 * @param mail
 	 *            : mail de la personne
+	 * @param decouv
+	 *            : découvert autorisé de la personne
+	 * 
 	 */
 	@SuppressWarnings("resource")
-	public Client(String num, String nom, String prenom, int age, String mail,
-			double decouv) {
+	public Client(String num, String nom, String prenom, int age, String mail, double decouv) {
 
 		this.DECOUVERT_AUTORISE = decouv;
 		this.nbCompte = 1;
 
 		while (!verifFormatNumeroDeCompte(num)) {
-			System.err.println("Numéro de compte non valide pour " + nom + " "
-					+ prenom + " ! \n Format : GP.xxNNNNN");
+			System.err.println("Numéro de compte non valide pour " + nom + " " + prenom + " ! \n Format : GP.xxNNNNN");
 			System.out.println("Saisir un numero de compte valide : ");
 			Scanner sc = new Scanner(System.in);
 			num = sc.next();
@@ -116,17 +116,12 @@ public abstract class Client implements Serializable, Cloneable {
 	 *            : le numéro de compte a vérifier
 	 * @return Vrai si le numéro à le bon format (GP.fd12345), faux sinon
 	 */
-	public static boolean verifFormatNumeroDeCompte(String num)
-			throws IllegalArgumentException {
+	public static boolean verifFormatNumeroDeCompte(String num) throws IllegalArgumentException {
 		if (num.length() == 10) {
-			if (num.charAt(0) == 'G' && num.charAt(1) == 'P'
-					&& num.charAt(2) == '.') {
-				if (estMinusculeCaractere(num.charAt(3))
-						&& estMinusculeCaractere(num.charAt(4))) {
-					if (estMinusculeChiffre(num.charAt(5))
-							&& estMinusculeChiffre(num.charAt(6))
-							&& estMinusculeChiffre(num.charAt(7))
-							&& estMinusculeChiffre(num.charAt(8))
+			if (num.charAt(0) == 'G' && num.charAt(1) == 'P' && num.charAt(2) == '.') {
+				if (estMinusculeCaractere(num.charAt(3)) && estMinusculeCaractere(num.charAt(4))) {
+					if (estMinusculeChiffre(num.charAt(5)) && estMinusculeChiffre(num.charAt(6))
+							&& estMinusculeChiffre(num.charAt(7)) && estMinusculeChiffre(num.charAt(8))
 							&& estMinusculeChiffre(num.charAt(9))) {
 						return true;
 
@@ -187,8 +182,7 @@ public abstract class Client implements Serializable, Cloneable {
 	 * personne
 	 */
 	public void visualiserCompte() {
-		System.out.println("\t Visualisation des comptes de " + this.prenom
-				+ " " + this.nom);
+		System.out.println("\t Visualisation des comptes de " + this.prenom + " " + this.nom);
 		Iterator<Compte> listeCompte = this.getCompteBancaires().iterator();
 		while (listeCompte.hasNext()) {
 			Compte cb = listeCompte.next();
@@ -333,8 +327,7 @@ public abstract class Client implements Serializable, Cloneable {
 
 	@Override
 	public String toString() {
-		return this.numero + " - " + this.nom + " " + this.prenom + " - "
-				+ this.age + " ans - " + this.email;
+		return this.numero + " - " + this.nom + " " + this.prenom + " - " + this.age + " ans - " + this.email;
 
 	}
 
@@ -383,6 +376,11 @@ public abstract class Client implements Serializable, Cloneable {
 		return DECOUVERT_AUTORISE;
 	}
 
+	/**
+	 * Fonction permettant de cloner un client
+	 * 
+	 * @return le client cloné
+	 */
 	public Object clone() {
 		Client c = null;
 		try {
@@ -393,6 +391,11 @@ public abstract class Client implements Serializable, Cloneable {
 		return c;
 	}
 
+	/**
+	 * Fonction permettant de connaitre le coût des comptes pour un client
+	 * 
+	 * @return le coût des comptes à un moment T
+	 */
 	public abstract double getMontantAbonnement();
 
 }

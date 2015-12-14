@@ -1,5 +1,8 @@
 package Exception;
 
+/**
+ * Class permettant de lever une exception si le format du fichier à charger n'est pas le bon 
+ */
 public class FormatFichierOperation extends Exception {
 
 	/**

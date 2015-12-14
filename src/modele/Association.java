@@ -1,5 +1,11 @@
 package modele;
 
+/**
+ * Class association
+ * 
+ * @author Quentin
+ *
+ */
 public class Association extends Client {
 
 	/**
@@ -8,6 +14,12 @@ public class Association extends Client {
 	private static final long serialVersionUID = 4733030780710580947L;
 	private String libelle;
 
+	/**
+	 * Constructeur de la class Association
+	 * 
+	 * @param libelle
+	 *            : nom de l'association
+	 */
 	public Association(String libelle) {
 		this.libelle = libelle;
 	}

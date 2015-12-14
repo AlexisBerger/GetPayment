@@ -35,19 +35,16 @@ public class Application {
 
 	}
 
-	public void chargerFichier() {
-
-	}
-
 	/**
 	 * Procédure permettant de lancer/démarrer l'application
 	 */
 	public void demarrer() {
-		System.out
-				.println("\t \t Bienvenue dans la gestion de votre compte Bancaire");
+		System.out.println("\t \t Bienvenue dans la gestion de votre compte Bancaire");
 		boolean existe = false;
 		int compteur = 1;
 		File monfichier = null;
+		// Permet de parcourir les fichiers de sauvegarde pour trouver le
+		// dernier à charger (celui avec le nombre le plus grand)
 		while (!existe) {
 			monfichier = new File("archives/sauvegarde" + compteur + ".dat");
 			if (monfichier.exists()) {
@@ -62,9 +59,7 @@ public class Application {
 			ObjectInputStream oos = null;
 			try {
 				fichier = new FileInputStream(monfichier);
-				System.out
-						.println("En train de lire le fichier archives/sauvegarde"
-								+ (compteur - 1) + ".dat");
+				System.out.println("En train de lire le fichier archives/sauvegarde" + (compteur - 1) + ".dat");
 				oos = new ObjectInputStream(fichier);
 				Object read;
 				while ((read = oos.readObject()) != null) {
@@ -94,20 +89,17 @@ public class Application {
 			menu2();
 
 		} else {
-			System.out
-					.println("Aprennons d'abord a nous connaitre \nVous êtes (Nom + Prénom) ? ");
+			// Cas ou aucun fichier de sauvegarde existe (permet de saisir un
+			// utilisateur personnalisé)
+			System.out.println("Aprennons d'abord a nous connaitre \nVous êtes (Nom + Prénom) ? ");
 			Scanner sc = new Scanner(System.in);
 			String pers = sc.nextLine();
 			String tab[] = pers.split("\\s");
 
 			try {
 
-				System.out
-						.println("Bien "
-								+ tab[1]
-								+ " "
-								+ tab[0]
-								+ ", sans indiscrétion pourrais-je connaitre votre âge ? ");
+				System.out.println(
+						"Bien " + tab[1] + " " + tab[0] + ", sans indiscrétion pourrais-je connaitre votre âge ? ");
 
 				int age = -1;
 				while (age < 0) {
@@ -119,61 +111,64 @@ public class Application {
 					}
 				}
 
-				Client p = new ClientProfessionnel("GP."
-						+ tab[0].toLowerCase().charAt(0)
-						+ tab[1].toLowerCase().charAt(0) + "12345", tab[0],
+				Client p = new ClientProfessionnel(
+						"GP." + tab[0].toLowerCase().charAt(0) + tab[1].toLowerCase().charAt(0) + "12345", tab[0],
 						tab[1], age, "tot@mail.fr", "Orange", 123459679);
 
 				p.nouveauCompte(1000.00, "A");
 				p.nouveauCompte(100.0, "B");
 				p.nouveauCompte(10.0, "C");
 
-				Client p1 = new ClientParticulier("GP.aj98765", "AiMARRE",
-						"Jean", 12, "AiMARRE@mail.fr");
+				// Création de deux client pour les tests
+				Client p1 = new ClientParticulier("GP.aj98765", "AiMARRE", "Jean", 12, "AiMARRE@mail.fr");
 				p1.nouveauCompte(1000.00, "A");
 				p1.nouveauCompte(100.0, "B");
 				p1.nouveauCompte(10.0, "C");
 
-				Client p2 = new ClientParticulier("GP.ch98765", "COVERT",
-						"Harry", 14, "COVERT@mail.fr");
+				Client p2 = new ClientParticulier("GP.ch98765", "COVERT", "Harry", 14, "COVERT@mail.fr");
 				p2.nouveauCompte(100000.00, "A");
 				p2.nouveauCompte(100.0, "B");
 				p2.nouveauCompte(10.0, "C");
 
+				// On ajoute les clients à la liste des clients
 				this.aouterClient(p);
 				this.aouterClient(p1);
 				this.aouterClient(p2);
 				menu2();
 
 			} catch (IndexOutOfBoundsException e) {
-				System.out
-						.println("Il faut saisir le nom ET le prénom pour l'ouverture d'un compte bancaire. \nRechargez l'application");
+				System.out.println(
+						"Il faut saisir le nom ET le prénom pour l'ouverture d'un compte bancaire. \nRechargez l'application");
 			}
 
 		}
 
 	}
 
+	/**
+	 * Procédure permettant d'afficher le menu et de traiter les cas en fonction
+	 * de la saisie de l'utilisateur
+	 */
 	public void menu2() {
 		Scanner sc = new Scanner(System.in);
 		int res = 0;
 		do {
-
 			res = menu();
 
 			switch (res) {
+			// Afficher tous les clients et leurs comptes
 			case 1:
 				for (Client tpers : this.tabClients) {
 					tpers.visualiserCompte();
 				}
 				break;
+			// Faire une opération sur le compte d’un client.
 			case 2:
 				String numeroClient = null;
 				do {
 					numeroClient = selectClient();
 					if (recupererClient(numeroClient) == null) {
-						System.err
-								.println("Le numéro de client n'existe pas !\n");
+						System.err.println("Le numéro de client n'existe pas !\n");
 					}
 				} while (recupererClient(numeroClient) == null);
 				int nb = 0;
@@ -197,7 +192,7 @@ public class Application {
 					faireOperation(recupererClient(numeroClient), nb);
 				} while (nb != 6);
 				break;
-
+			// Faire des opérations à partir d'un fichier.
 			case 3:
 				boolean erreur = true;
 				CSV csv = new CSV("./monFichier.csv");
@@ -207,17 +202,14 @@ public class Application {
 							Client c = recupererClient(op.getClient());
 							ArrayList<Compte> listC = c.getCompteBancaires();
 							for (Compte compte : listC) {
-								if (compte.getNumeroDeCompte().equals(
-										op.getCompte())) {
+								if (compte.getNumeroDeCompte().equals(op.getCompte())) {
 									erreur = false;
 									switch (op.getType()) {
 									case DEBITE:
-										faireOperationViaFichier(c, compte,
-												op.getMontant(), 1);
+										faireOperationViaFichier(c, compte, op.getMontant(), 1);
 										break;
 									case CREDITE:
-										faireOperationViaFichier(c, compte,
-												op.getMontant(), 2);
+										faireOperationViaFichier(c, compte, op.getMontant(), 2);
 										break;
 									default:
 										break;
@@ -225,23 +217,21 @@ public class Application {
 								}
 							}
 							if (erreur) {
-								throw new FormatFichierOperation("Le client "
-										+ op.getClient()
-										+ " n'as pas de compte n° "
-										+ op.getCompte());
+								throw new FormatFichierOperation(
+										"Le client " + op.getClient() + " n'as pas de compte n° " + op.getCompte());
 
 							}
 
 						} else {
-							throw new FormatFichierOperation(
-									"Le format du numero de client est faux");
+							throw new FormatFichierOperation("Le format du numero de client est faux");
 						}
 					} catch (FormatFichierOperation e) {
 						e.printStackTrace();
 					}
 				}
-
 				break;
+
+			// Revenir à une sauvegarde précédente.
 			case 4:
 				boolean ex = false;
 				int compt = 1;
@@ -250,16 +240,14 @@ public class Application {
 					monfic = new File("archives/sauvegarde" + compt + ".dat");
 					if (monfic.exists()) {
 
-						System.out.println("Sauvegarde n°" + compt + " : "
-								+ "archives/sauvegarde" + compt + ".dat");
+						System.out.println("Sauvegarde n°" + compt + " : " + "archives/sauvegarde" + compt + ".dat");
 						compt++;
 					} else {
 						ex = true;
 					}
 				}
 				Scanner scan = new Scanner(System.in);
-				System.out
-						.println("Saisir le numéro de la sauvegarde a charger : ");
+				System.out.println("Saisir le numéro de la sauvegarde a charger : ");
 				int fichierAcharger = -1;
 				if (scan.hasNextInt()) {
 					fichierAcharger = scan.nextInt();
@@ -274,8 +262,7 @@ public class Application {
 					try {
 						fichier = new FileInputStream(fic);
 						System.out
-								.println("En train de lire le fichier archives/sauvegarde"
-										+fichierAcharger  + ".dat");
+								.println("En train de lire le fichier archives/sauvegarde" + fichierAcharger + ".dat");
 						oos = new ObjectInputStream(fichier);
 						Object read;
 						this.tabClients = new ArrayList<>();
@@ -305,14 +292,14 @@ public class Application {
 					}
 					menu2();
 				}
-				
 				break;
+
+			// Quitter.
 			case 5:
 				boolean existe = false;
 				int compteur = 1;
 				while (!existe) {
-					File monfichier = new File("archives/sauvegarde" + compteur
-							+ ".dat");
+					File monfichier = new File("archives/sauvegarde" + compteur + ".dat");
 					if (monfichier.exists()) {
 						compteur++;
 					} else {
@@ -321,8 +308,7 @@ public class Application {
 				}
 
 				try {
-					FileOutputStream fichier = new FileOutputStream(
-							"archives/sauvegarde" + compteur + ".dat");
+					FileOutputStream fichier = new FileOutputStream("archives/sauvegarde" + compteur + ".dat");
 					ObjectOutputStream oos = new ObjectOutputStream(fichier);
 					for (Client client : tabClients) {
 						oos.writeObject(client);
@@ -382,7 +368,6 @@ public class Application {
 	 *            : numéro de la personne à rechercher
 	 * @return la personne si son numéro existe, null sinon.
 	 */
-
 	public Client recupererClient(String num) {
 		for (Client p : tabClients) {
 			if (p.getNumero().equals(num)) {
@@ -417,7 +402,6 @@ public class Application {
 	 * @param nb
 	 *            : numéro de l'action
 	 */
-
 	public void faireOperation(Client p, int nb) {
 		Iterator<Compte> it;
 
@@ -425,14 +409,15 @@ public class Application {
 		Compte compteSelect = null;
 
 		switch (nb) {
+		// Voir le solde du compte
 		case 1:
 			p.visualiserCompte();
 			break;
+		// Retirer un montant
 		case 2:
 			Scanner sc = new Scanner(System.in);
 			it = p.getCompteBancaires().iterator();
-			System.out
-					.println("Veuillez saisir le numero de compte à utiliser :");
+			System.out.println("Veuillez saisir le numero de compte à utiliser :");
 
 			num = sc.nextLine();
 			compteSelect = null;
@@ -452,8 +437,7 @@ public class Application {
 				if (sc.hasNextDouble()) {
 
 					try {
-						compteSelect.RetirerMontant(sc.nextDouble(),
-								p.getDECOUVERT_AUTORISE());
+						compteSelect.RetirerMontant(sc.nextDouble(), p.getDECOUVERT_AUTORISE());
 					} catch (OperationException e) {
 						e.printStackTrace();
 					}
@@ -461,11 +445,12 @@ public class Application {
 			}
 
 			break;
+
+		// Faire un apport
 		case 3:
 			sc = new Scanner(System.in);
 			it = p.getCompteBancaires().iterator();
-			System.out
-					.println("Veuillez saisir le numero de compte a utiliser :");
+			System.out.println("Veuillez saisir le numero de compte a utiliser :");
 			num = sc.nextLine();
 			compteSelect = null;
 
@@ -486,11 +471,11 @@ public class Application {
 				}
 			}
 			break;
+		// Afficher historique
 		case 4:
 			sc = new Scanner(System.in);
 			it = p.getCompteBancaires().iterator();
-			System.out
-					.println("Veuillez saisir le numero de compte a utiliser :");
+			System.out.println("Veuillez saisir le numero de compte a utiliser :");
 			num = sc.nextLine();
 			compteSelect = null;
 
@@ -507,6 +492,7 @@ public class Application {
 				compteSelect.visualiserHistorique();
 			}
 			break;
+		// Ajouter un compte
 		case 5:
 			if (p.getNbCompte() <= 10) {
 				System.out.println("Saisir numero de compte : ");
@@ -530,6 +516,7 @@ public class Application {
 				}
 			}
 			break;
+		// Quitter
 		case 6:
 			break;
 		default:
@@ -539,6 +526,18 @@ public class Application {
 		}
 	}
 
+	/**
+	 * Procédure permettant de réaliser une opération à partir d'un fichier
+	 * 
+	 * @param p
+	 *            : le client qui va réaliser une opération
+	 * @param c
+	 *            : le compte sur lequel l'opération va être réaliser
+	 * @param m
+	 *            : le montant de l'opération
+	 * @param nb
+	 *            : le type d'opération (ajout ou retrait) 
+	 */
 	public void faireOperationViaFichier(Client p, Compte c, Double m, int nb) {
 		switch (nb) {
 		case 1:
