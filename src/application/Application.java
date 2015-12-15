@@ -265,7 +265,7 @@ public class Application {
 								.println("En train de lire le fichier archives/sauvegarde" + fichierAcharger + ".dat");
 						oos = new ObjectInputStream(fichier);
 						Object read;
-						this.tabClients = new ArrayList<>();
+						this.tabClients = new ArrayList<Client>();
 						while ((read = oos.readObject()) != null) {
 							if (read instanceof ClientProfessionnel) {
 								this.tabClients.add((ClientProfessionnel) read);
